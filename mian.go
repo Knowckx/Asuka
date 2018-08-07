@@ -2,18 +2,31 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 	"time"
+
+	"github.com/Knowckx/Asuka/goutil"
 )
 
 func main() {
-	fmt.Print("Hello Asuka")
+
+	fmt.Println("Hello Asuka")
+	v := []int64{2, 3, 1}
+	Display(v)
 }
 
-func Prt(out []*interface{}) {
-	for ii, vv := range out {
-		fmt.Printf("List num %d \n%+v\n", ii+1, vv)
-	}
+func Display(x interface{}) {
+	name := "Text"
+	fmt.Printf("Display %s (%T):\n", name, x)
+	goutil.Display(name, reflect.ValueOf(x))
+}
 
+func PrintS() {
+	fmt.Printf("!")
+	// out []int{}
+	// for ii, vv := range out {
+	// 	fmt.Printf("List num %d \n%+v\n", ii+1, vv)
+	// }
 }
 
 func recordTime() {

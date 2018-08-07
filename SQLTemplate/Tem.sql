@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `t_broker_overnightrate_record`  (
   INDEX `idx_order_search`(`BrokerID`, `Account`, `OrderID`) USING BTREE --索引设置
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;  
 
-
+ 
 /*
 COLLATE = utf8_general_ci   
   ci是case insensitive的缩写，意思是大小写不敏感
