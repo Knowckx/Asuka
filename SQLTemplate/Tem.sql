@@ -3,18 +3,20 @@ SET NAMES utf8;  --建立连接的时候设置字符集
 -- ----------------------------
 -- 标准创建表 SQL模版
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `t_broker_overnightrate_record`  (
-  `ID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, -- 经纪商隔夜利息记录表
-  `BrokerID` int(11) NOT NULL, --经纪商ID
-  `Symbol` varchar(64) NOT NULL, --交易品种
-  `RecodeTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , --记录日期   
-
-  `OrderID` int(11) NOT NULL,
-  `Swaptype` varchar(64)   NOT NULL, -- 隔夜利息计算模式
-  `Swaplong` varchar(64)   NOT NULL, -- 买单利息
-  `Swapshort` varchar(64)   NOT NULL -- 卖单利息
-  INDEX `idx_order_search`(`BrokerID`, `Account`, `OrderID`) USING BTREE --索引设置
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;  
+CREATE TABLE IF NOT EXISTS `t_broker_overnightrate_record` 
+( 
+  `id`       INT NOT NULL auto_increment PRIMARY KEY,            -- 经纪商隔夜利息记录表 
+  `brokerid` INT NOT NULL,                                       -- 经纪商ID 
+  `symbol`   VARCHAR ( 64 ) NOT NULL,                            -- 交易品种 
+  `swaptype` INT NOT NULL,                                       -- 隔夜利息计算模式 
+  `swaplong` DOUBLE NOT NULL,                                    -- 买单利息 
+  `swapshort` DOUBLE NOT NULL,                                   -- 卖单利息 
+  `createtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,     -- 记录日期 
+  
+  INDEX `idx_symbol_search` ( `brokerid`, `symbol` ) using btree,-- 索引设置 
+  INDEX `idx_time_search` ( `createtime` ) USING btree 
+) 
+engine = innodb CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
  
 /*

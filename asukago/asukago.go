@@ -1,4 +1,4 @@
-package goutil
+package asukago
 
 import (
 	"fmt"
@@ -6,36 +6,42 @@ import (
 	"strconv"
 )
 
-func Display(path string, v reflect.Value) {
+func Display(x interface{}) {
+	name := "Text"
+	fmt.Printf("Display %s (%T):\n", name, x)
+	displayPath(name, reflect.ValueOf(x))
+}
+
+func displayPath(path string, v reflect.Value) {
 	switch v.Kind() {
 	case reflect.Invalid:
 		fmt.Printf("%s = invalid\n", path)
 	case reflect.Slice, reflect.Array:
 		for i := 0; i < v.Len(); i++ {
-			Display(fmt.Sprintf("%s[%d]", path, i), v.Index(i))
+			displayPath(fmt.Sprintf("%s[%d]", path, i), v.Index(i))
 		}
 	case reflect.Struct:
 		for i := 0; i < v.NumField(); i++ {
 			fieldPath := fmt.Sprintf("%s.%s", path, v.Type().Field(i).Name)
-			Display(fieldPath, v.Field(i))
+			displayPath(fieldPath, v.Field(i))
 		}
 	case reflect.Map:
 		for _, key := range v.MapKeys() {
 			fieldPath := fmt.Sprintf("%s[%s]", path, key)
-			Display(fieldPath, v.MapIndex(key))
+			displayPath(fieldPath, v.MapIndex(key))
 		}
 	case reflect.Ptr:
 		if v.IsNil() {
 			fmt.Printf("%s = nil\n", path)
 		} else {
-			Display(fmt.Sprintf("*%s", path), v.Elem())
+			displayPath(fmt.Sprintf("*%s", path), v.Elem())
 		}
 	case reflect.Interface:
 		if v.IsNil() {
 			fmt.Printf("%s = nil\n", path)
 		} else {
 			fmt.Printf("%s.type = %s\n", path, v.Elem().Type())
-			Display(path+".value", v.Elem())
+			displayPath(path+".value", v.Elem())
 		}
 	default: //简单类型喽
 		fmt.Printf("%s = %s\n", path, formatAtom(v))
@@ -53,6 +59,8 @@ func formatAtom(v reflect.Value) string {
 	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32,
 		reflect.Uint64:
 		return strconv.FormatUint(v.Uint(), 10)
+	case reflect.Float32, reflect.Float64:
+		return strconv.FormatFloat(v.Float(), 'f', -1, 64)
 	case reflect.Bool:
 		return strconv.FormatBool(v.Bool())
 	case reflect.String:
