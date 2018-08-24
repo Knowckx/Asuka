@@ -63,6 +63,14 @@ func RemoveRepByMap(slc []int) []int {
 	return result
 }
 
+// go AsukaDebug(h)
+
+// func AsukaDebug(h *handler.GatewaySrv) {
+// 	fmlog.SetConsole()
+// 	time.Sleep(time.Duration(2) * time.Second)
+// 	h.GetTraderInfo(nil, nil, nil)
+// }
+
 //结构体转换
 // func BrokerSpreadRecordFromProto(in *pbmo.BrokerSpreadRecord,
 // 	) *BrokerSpreadRecord {
