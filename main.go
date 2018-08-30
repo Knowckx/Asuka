@@ -2,11 +2,8 @@ package main
 
 import (
 	"fmt"
-	"reflect"
+	"strconv"
 	"time"
-	"unsafe"
-
-	"github.com/Knowckx/Asuka/goutil"
 )
 
 func main() {
@@ -16,29 +13,15 @@ func main() {
 	// Display(v)
 }
 func test() {
-	var n int64 = 5
-	var pn = &n
-	var pf = (*float64)(unsafe.Pointer(pn))
-	// now, pn and pf are pointing at the same memory address
-	fmt.Println(*pf) // 2.5e-323
-	*pf = 3.14159
-	fmt.Println(n) // 4614256650576692846
-	fmt.Printf("%T", n)
 
+	avg, err := strconv.ParseFloat(fmt.Sprintf("%.3f", 61/float64(12)), 3)
+	fmt.Print(avg, err)
 }
 
 func Display(x interface{}) {
 	name := "Text"
 	fmt.Printf("Display %s (%T):\n", name, x)
-	goutil.Display(name, reflect.ValueOf(x))
-}
-
-func PrintS() {
-	fmt.Printf("!")
-	// out []int{}
-	// for ii, vv := range out {
-	// 	fmt.Printf("List num %d \n%+v\n", ii+1, vv)
-	// }
+	// goutil.Display(name, reflect.ValueOf(x))
 }
 
 func recordTime() {
