@@ -1,4 +1,4 @@
-package asukago
+package asuka
 
 import (
 	"fmt"
@@ -21,6 +21,7 @@ func displayPath(path string, v reflect.Value) {
 			displayPath(fmt.Sprintf("%s[%d]", path, i), v.Index(i))
 		}
 	case reflect.Struct:
+		// fmt.Printf("%s %#v\n", path, v) //正面再嵌结构体的话…… %#v 对指针值无力
 		for i := 0; i < v.NumField(); i++ {
 			fieldPath := fmt.Sprintf("%s.%s", path, v.Type().Field(i).Name)
 			displayPath(fieldPath, v.Field(i))

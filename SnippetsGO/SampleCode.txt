@@ -1,0 +1,22 @@
+//结构体转换
+// func BrokerSpreadRecordFromProto(in *pbmo.BrokerSpreadRecord,
+// 	) *BrokerSpreadRecord {
+// 		out := &BrokerSpreadRecord{
+// 			BrokerID:   in.BrokerID,
+// 			Symbol:     in.Symbol,
+// 			MinSpread:  in.MinSpread,
+// 			MaxSpread:  in.MaxSpread,
+// 			CreateTime: mdtime.TimeFromProto(in.CreateTime),
+// 		}
+// 		return out
+// 	}
+
+// 	func BrokerSpreadRecordFromProtoL(in []*pbmo.BrokerSpreadRecord,
+// 	) []*BrokerSpreadRecord {
+// 		outL := []*BrokerSpreadRecord{}
+// 		for _, out := range in {
+// 			r := BrokerSpreadRecordFromProto(out)
+// 			outL = append(outL, r)
+// 		}
+// 		return outL
+// 	}
