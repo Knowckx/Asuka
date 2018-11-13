@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/Knowckx/Asuka/asuka"
 )
@@ -20,31 +21,11 @@ type AA struct {
 }
 
 func test() {
-	aa := make([]*AA, 0)
-
-	a := &AA{
-		v1: 1,
-		v2: "st",
-		v3: 1.21,
-	}
-	a1 := &AA{
-		v1: 2,
-		v2: "st22",
-		v3: 1.21,
-	}
-
-	aa = append(aa, a)
-	aa = append(aa, a1)
-
+	aa := time.Unix(0, 10)
+	fmt.Println(aa)
 	asuka.Display(aa)
-	// fmt.Printf("%v\n", a)
+	// fmt.Println(reflect.ValueOf(aa).Kind())
 
-	// fmt.Printf("%+v\n", a)
-
-	// fmt.Printf("%#v\n", a)
-
-	// avg, err := strconv.ParseFloat(fmt.Sprintf("%.3f", 61/float64(12)), 3)
-	// fmt.Print(avg, err)
 }
 
 func Display(x interface{}) {

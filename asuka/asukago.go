@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"reflect"
 	"strconv"
+	"time"
 )
 
 func Display(x interface{}) {
@@ -13,6 +14,13 @@ func Display(x interface{}) {
 }
 
 func displayPath(path string, v reflect.Value) {
+	va := v.Interface()
+	switch va.(type) {
+	case time.Time:
+		fmt.Printf("%s = %s\n", path, va.(time.Time).String())
+		return
+	}
+
 	switch v.Kind() {
 	case reflect.Invalid:
 		fmt.Printf("%s = invalid\n", path)
@@ -44,6 +52,7 @@ func displayPath(path string, v reflect.Value) {
 			fmt.Printf("%s.type = %s\n", path, v.Elem().Type())
 			displayPath(path+".value", v.Elem())
 		}
+
 	default: //简单类型喽
 		fmt.Printf("%s = %s\n", path, formatAtom(v))
 	}
