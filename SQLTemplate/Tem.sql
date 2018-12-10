@@ -3,30 +3,18 @@ SET NAMES utf8;  --建立连接的时候设置字符集
 -- ----------------------------
 -- 标准创建表 SQL模版
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `t_broker` 
-( 
-  `id`       INT NOT NULL auto_increment PRIMARY KEY COMMENT '经纪商名称',            -- 经纪商隔夜利息记录表 
-  `brokerid` INT NOT NULL,                                       COMMENT '经纪商ID',
-  `symbol`   VARCHAR (128) NOT NULL,                             COMMENT '交易品种',
-  `swaptype` INT NOT NULL,                                       COMMENT '隔夜利息计算模式',
-  `swaplong` DOUBLE NOT NULL,                                    COMMENT '买单利息',
-  `swapshort` DOUBLE NOT NULL,                                   COMMENT '卖单利息',
-  `createtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,     COMMENT '记录日期'
-  `UpdateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-  
-  INDEX `idx_symbol_search` ( `brokerid`, `symbol` ) using btree,-- 索引设置 
-  INDEX `idx_time_search` ( `createtime` ) USING btree 
-) 
-CHARACTER SET = utf8mb4 COLLATE = utf8_general_ci comment='表的注释';
-
-/*
-COLLATE = utf8_general_ci   
-  ci是case insensitive的缩写，意思是大小写不敏感
-  utf8_general_ci本身是一种排序方式
-*/
-
-/*
-时间可为空值
-  `EndTime`        TIMESTAMP(3) NULL DEFAULT NULL
-*/
+CREATE TABLE IF NOT EXISTS `t_customrank_config` (
+		`ID` INT NOT NULL auto_increment PRIMARY KEY COMMENT '排行榜唯一ID',
+		`RankName` VARCHAR ( 64 ) NOT NULL COMMENT '排行榜名称',
+		`RankText` VARCHAR ( 128 ) COMMENT '排行榜描述',
+		`RankIndex` INT NOT NULL COMMENT '排行榜的位置序号',
+		`ListType` INT NOT NULL COMMENT '上榜方式',
+		`ManualCfg` INT NULL COMMENT '外键 手动上榜配置',
+		`CondCfg` INT NULL COMMENT '外键 条件上榜配置',
+		`HideConfig` INT NOT NULL COMMENT '字段隐藏配置',
+		`CreateTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		`UpdateTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+		UNIQUE `idx_unique_index` ( `RankIndex` )
+	) CHARACTER SET = utf8mb4 
+  COMMENT = '细分排行榜配置';
 
