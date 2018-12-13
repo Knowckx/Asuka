@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/Knowckx/Asuka/asuka"
 )
@@ -21,10 +20,7 @@ type AA struct {
 }
 
 func test() {
-	aa := time.Unix(0, 10)
-	fmt.Println(aa)
-	asuka.Display(aa)
-	// fmt.Println(reflect.ValueOf(aa).Kind())
+	asuka.Test()
 
 }
 

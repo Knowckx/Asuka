@@ -42,3 +42,10 @@ func checkArgsNewMod(in *NewMod) error {
 	}
 	return nil
 }
+
+// func NewDoubleRange(min, max float64) *DoubleRange {
+// 	out := &DoubleRange{}
+// 	out.Max = max
+// 	out.Min = min
+// 	return out
+// }
