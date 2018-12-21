@@ -2,15 +2,23 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 
 	"github.com/Knowckx/Asuka/asuka"
+	"github.com/Knowckx/Asuka/pkg/excel"
 )
 
+type Test struct {
+	ID int
+}
+
+func (t *Test) PrintField() {
+	v := reflect.ValueOf(t).Elem()
+	fmt.Println(v.NumField())
+}
+
 func main() {
-	test()
-	// fmt.Println("Hello Asuka")
-	// v := []int64{2, 3, 1}
-	// Display(v)
+	excel.StartExcel()
 }
 
 type AA struct {

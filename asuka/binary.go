@@ -2,7 +2,6 @@ package asuka
 
 import (
 	"fmt"
-	"log"
 	"math"
 	"reflect"
 	"strconv"
@@ -24,6 +23,17 @@ func Test() {
 	cf.MR = false
 	cf.ROI = true
 	// fmt.Println(cf.ToBin())
+	v := reflect.ValueOf(cf).Elem()
+	fmt.Println(v.Kind())
+	_ = v.NumField() - 5
+	return
+
+	// // 位数不足，左补0
+	// func (c *RankFiledHideConfig) FromDec(dec int) error {
+	// 	ss := DecBin(dec)
+	// 	leng := len(ss)
+	// 	v := reflect.ValueOf(c).Elem()
+
 	err := cf.FromBin("110")
 	if err != nil {
 		fmt.Println(err)
@@ -76,34 +86,20 @@ func (c *Cfg) FromBin(ins string) error {
 
 // Decimal to binary  10 -> 1010
 func DecBin(n int) string {
-	if n < 0 {
-		log.Println("Decimal to binary error: the argument must be greater than zero.")
-		return ""
-	}
-	if n == 0 {
-		return "0"
-	}
-	s := ""
-	for q := n; q > 0; q = q / 2 {
-		m := q % 2
-		s = fmt.Sprintf("%v%v", m, s)
-	}
-	return s
+	return fmt.Sprintf("%b", n)
 }
 
 // binary to Decimal  1010 -> 10
-func BinDec(b string) (n int) {
-	s := strings.Split(b, "")
-	l := len(s)
-	i := 0
+func BinDec(b string) (int, error) {
+	ss := strings.Split(b, "")
+	l := len(ss)
 	d := float64(0)
-	for i = 0; i < l; i++ {
-		f, err := strconv.ParseFloat(s[i], 10)
+	for i := 0; i < l; i++ {
+		f, err := strconv.ParseFloat(ss[i], 10)
 		if err != nil {
-			log.Println("Binary to decimal error:", err.Error())
-			return -1
+			return -1, fmt.Errorf("Binary to decimal error:", err.Error())
 		}
 		d += f * math.Pow(2, float64(l-i-1))
 	}
-	return int(d)
+	return int(d), nil
 }

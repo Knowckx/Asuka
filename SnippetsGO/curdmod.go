@@ -4,32 +4,45 @@ import (
 	"fmt"
 )
 
-// 映射proto
+// 新的结构体
 type NewMod struct {
 	UserID int
 	Text   string
 }
 
 // 映射proto
-type pbdsMod struct {
+type pbMod struct {
 	UserID int
 	Text   string
 }
 
-func NewModsFromProto(ins []*pbdsMod) []*NewMod {
+func NewModsFromProto(ins []*pbMod) []*NewMod {
 	outs := []*NewMod{}
 	for _, in := range ins {
-		out := NewModFromProto(in)
+		out := &NewMod{}
+		out.New(in)
 		outs = append(outs, out)
 	}
 	return outs
 }
 
-func NewModFromProto(in *pbdsMod) *NewMod {
-	out := &NewMod{}
-	out.UserID = in.UserID
-	//...
+func (n *NewMod) New(in *pbMod) {
+	n.UserID = in.UserID
+}
+
+func (n *NewMod) ToProto() *pbMod {
+	out := &pbMod{}
+	out.UserID = n.UserID
 	return out
+}
+
+func NewModsToProto(ins []*NewMod) []*pbMod {
+	outs := []*pbMod{}
+	for _, in := range ins {
+		out := in.ToProto()
+		outs = append(outs, out)
+	}
+	return outs
 }
 
 //-----------
