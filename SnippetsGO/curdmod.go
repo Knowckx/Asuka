@@ -10,40 +10,34 @@ type NewMod struct {
 	Text   string
 }
 
-// 映射proto
-type pbMod struct {
-	UserID int
-	Text   string
-}
+// func NewModsFromProto(ins []*pbmod.TestReq) []*NewMod {
+// 	outs := []*NewMod{}
+// 	for _, in := range ins {
+// 		out := &NewMod{}
+// 		out.New(in)
+// 		outs = append(outs, out)
+// 	}
+// 	return outs
+// }
 
-func NewModsFromProto(ins []*pbMod) []*NewMod {
-	outs := []*NewMod{}
-	for _, in := range ins {
-		out := &NewMod{}
-		out.New(in)
-		outs = append(outs, out)
-	}
-	return outs
-}
+// func (n *NewMod) New(in *TestReq) {
+// 	n.UserID = in.UserID
+// }
 
-func (n *NewMod) New(in *pbMod) {
-	n.UserID = in.UserID
-}
+// func (n *NewMod) ToProto() *TestReq {
+// 	out := &TestReq{}
+// 	out.UserID = n.UserID
+// 	return out
+// }
 
-func (n *NewMod) ToProto() *pbMod {
-	out := &pbMod{}
-	out.UserID = n.UserID
-	return out
-}
-
-func NewModsToProto(ins []*NewMod) []*pbMod {
-	outs := []*pbMod{}
-	for _, in := range ins {
-		out := in.ToProto()
-		outs = append(outs, out)
-	}
-	return outs
-}
+// func NewModsToProto(ins []*NewMod) []*TestReq {
+// 	outs := []*TestReq{}
+// 	for _, in := range ins {
+// 		out := in.ToProto()
+// 		outs = append(outs, out)
+// 	}
+// 	return outs
+// }
 
 //-----------
 func checkArgsNewMod(in *NewMod) error {
@@ -55,10 +49,3 @@ func checkArgsNewMod(in *NewMod) error {
 	}
 	return nil
 }
-
-// func NewDoubleRange(min, max float64) *DoubleRange {
-// 	out := &DoubleRange{}
-// 	out.Max = max
-// 	out.Min = min
-// 	return out
-// }
