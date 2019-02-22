@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package pb;
+
+// 新的物体
+message NewObjMod {
+    int32         RankIndex      = 1;  // 本条翻译对应的榜单配置位置序号
+    LanguageType  Lang           = 2;  // 语言标识
+    string        RankName       = 3;  // 排行榜名称
+}
+
+// 很多物体们
+message NewObjMods {
+    repeated NewObjMod Mods      = 1; 
+}
+
+// 枚举
+enum LanguageType {
+    zh_CN = 0;   // 中文 简体
+    zh_HK = 1;   // 中文 繁体
+    en_US = 2;   // 英语 美国
+}
+
+
+// 定义接口
+service XXXXSrv {
+    
+// ----------------- 排行榜配置外语翻译文本 start -----------------
+    // OA 增加 榜单配置对应的外语文本
+    rpc AddNewObjMod(NewObjMod) returns (EmptyMessage) {}
+
+    // OA 删除 某个榜单的外语文本
+    rpc DelNewObjMod(RankIndexWithLang) returns (EmptyMessage) {}
+
+    // OA 查询 某个榜单全部的外语文本
+    rpc GetNewObjMods(RankIndexWithLang) returns (NewObjMods) {}
+    
+    // OA 修改 榜单配置对应的外语文本
+    rpc UpdateNewObjMod(NewObjMod) returns (EmptyMessage) {}
+
+// ----------------- 排行榜配置外语翻译文本 end -----------------
+
+}
+
+
+message Language {
+    LanguageType  Lang  = 1;  // 语言标识
+}
+
+message RankIndexWithLang {
+    int32         RankIndex      = 1;  // 排行榜序号ID
+    LanguageType  Lang           = 2;  // 语言标识
+}
+
+
+
+
+
+
+// 为了测试
+message EmptyMessage {}

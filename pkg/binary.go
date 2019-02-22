@@ -1,4 +1,4 @@
-package asuka
+package pkg
 
 import (
 	"fmt"

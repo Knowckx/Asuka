@@ -5,7 +5,6 @@ import (
 	"reflect"
 
 	"github.com/Knowckx/Asuka/asuka"
-	"github.com/Knowckx/Asuka/pkg/excel"
 )
 
 type Test struct {
@@ -18,7 +17,16 @@ func (t *Test) PrintField() {
 }
 
 func main() {
-	excel.StartExcel()
+	// ss := "userId_account_brokerId"
+	// rst := strings.Split(ss, "_")
+	// asuka.Display(rst)
+	ints := []int32{1, 5, 45, 4, 2}
+
+	ss := asuka.SliceToString(ints)
+	fmt.Println(ss)
+	a := asuka.StringToSlice(ss)
+	fmt.Println(a)
+
 }
 
 type AA struct {
@@ -36,18 +44,4 @@ func Display(x interface{}) {
 	name := "Text"
 	fmt.Printf("Display %s (%T):\n", name, x)
 	// goutil.Display(name, reflect.ValueOf(x))
-}
-
-// List去重 通过map主键唯一的特性过滤重复元素
-func RemoveRepByMap(slc []int) []int {
-	result := []int{}
-	tempMap := map[int]byte{} // 存放不重复主键
-	for _, e := range slc {
-		l := len(tempMap)
-		tempMap[e] = 0
-		if len(tempMap) != l { // 加入map后，map长度变化，则元素不重复
-			result = append(result, e)
-		}
-	}
-	return result
 }
