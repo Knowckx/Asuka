@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package pb;
 
+
+// ----------------- 排行榜配置外语翻译文本 message start -----------------
+
 // 新的物体
 message NewObjMod {
     int32         RankIndex      = 1;  // 本条翻译对应的榜单配置位置序号
@@ -20,6 +23,7 @@ enum LanguageType {
     zh_HK = 1;   // 中文 繁体
     en_US = 2;   // 英语 美国
 }
+// ----------------- 排行榜配置外语翻译文本 message end -----------------
 
 
 // 定义接口
