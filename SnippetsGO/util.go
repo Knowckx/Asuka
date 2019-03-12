@@ -1,4 +1,4 @@
-package asuka
+package SnippetsGO
 
 import (
 	"fmt"

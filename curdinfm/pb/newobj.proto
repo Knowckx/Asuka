@@ -7,9 +7,10 @@ package pb;
 
 // 新的物体
 message NewObjMod {
-    int32         RankIndex      = 1;  // 本条翻译对应的榜单配置位置序号
-    LanguageType  Lang           = 2;  // 语言标识
-    string        RankName       = 3;  // 排行榜名称
+    MT4Account    MT4Account     = 1;  // 其他mod
+    int32         RankIndex      = 2;  // 本条翻译对应的榜单配置位置序号
+    LanguageType  Lang           = 3;  // 语言标识
+    string        RankName       = 4;  // 排行榜名称
 }
 
 // 很多物体们
@@ -22,6 +23,12 @@ enum LanguageType {
     zh_CN = 0;   // 中文 简体
     zh_HK = 1;   // 中文 繁体
     en_US = 2;   // 英语 美国
+}
+
+
+message MT4Account {
+    int32   BrokerID       = 1;  //经纪商ID
+    string  Account        = 2;  //账户
 }
 // ----------------- 排行榜配置外语翻译文本 message end -----------------
 

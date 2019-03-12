@@ -4,10 +4,11 @@ import "github.com/Knowckx/Asuka/curdinfm/pb"
 
 //----------------- Mod NewObjMod start -----------------
 type NewObjMod struct {
-	ID        int    `xorm:"ID"`
-	RankIndex int    `xorm:"RankIndex"`
-	Lang      string `xorm:"Lang"`
-	RankName  string `xorm:"RankName"`
+	ID         int `xorm:"ID"`
+	MT4Account *MT4Account
+	RankIndex  int    `xorm:"RankIndex"`
+	Lang       string `xorm:"Lang"`
+	RankName   string `xorm:"RankName"`
 }
 
 func (*NewObjMod) TableName() string {
@@ -18,12 +19,12 @@ func NewNewObjMod(in *pb.NewObjMod) *NewObjMod {
 	out := &NewObjMod{}
 	out.RankIndex = int(in.RankIndex)
 	out.Lang = in.Lang.String()
-	out.RankName = in.RankName
 	return out
 }
 
 func (in *NewObjMod) ToProto() *pb.NewObjMod {
 	out := &pb.NewObjMod{}
+	out.MT4Account = in.MT4Account.ToProto()
 	out.RankIndex = int32(in.RankIndex)
 	out.Lang = pb.LanguageType(pb.LanguageType_value[in.Lang])
 	out.RankName = in.RankName

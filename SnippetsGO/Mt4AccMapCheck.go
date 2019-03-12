@@ -23,6 +23,7 @@ func MapCheck(ins []*mod.AccInfo, accs []*mod.AccScore) []*mod.AccInfo {
 	return ins
 }
 
+//组装索引map
 func MakeAccMap(ins []*mod.AccScore) map[mod.MT4Account]int {
 	scoreMap := make(map[mod.MT4Account]int) //组装索引map
 	for _, in := range ins {
