@@ -15,6 +15,12 @@ func AddNewObjMod(tx *xorm.Session, l *mod.NewObjMod) error {
 	return err
 }
 
+// 增：批量
+func AddNewObjMods(tx *xorm.Session, l []*mod.NewObjMod) error {
+	_, err := tx.Insert(&l)
+	return err
+}
+
 // 删：通过特定标识
 func DelNewObjMod(tx *xorm.Session, RankIndex int, Lang string) error {
 	count, err := tx.Where("RankIndex = ? and Lang = ?", RankIndex, Lang).Delete(new(mod.NewObjMod))
@@ -64,3 +70,18 @@ func UpdateNewObjMod(tx *xorm.Session, l *mod.NewObjMod) error {
 }
 
 //----------------- NewObjMod CURD end -----------------
+
+//----------------- xorm CURD start -----------------
+
+// 裸SQL的使用
+func GetMaxIDFromTable(tx *xorm.Session, tname string) (int, error) {
+	sqlStr := fmt.Sprintf(`select MAX(ID) as ID from %s`, tname)
+	maxID := &mod.MaxID{}
+	_, err := tx.SQL(sqlStr).Get(maxID)
+	if err != nil {
+		return -1, err
+	}
+	return maxID.ID, nil
+}
+
+//----------------- xorm CURD end -----------------

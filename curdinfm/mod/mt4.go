@@ -23,3 +23,5 @@ func NewMT4Account(BrokerID int32, Account string) *MT4Account {
 }
 
 type MT4Accounts []*MT4Account
+
+type MT4AccData map[MT4Account]*NewObjMod

@@ -1,6 +1,10 @@
 package mod
 
-import "github.com/Knowckx/Asuka/curdinfm/pb"
+import (
+	"time"
+
+	"github.com/Knowckx/Asuka/curdinfm/pb"
+)
 
 //----------------- Mod NewObjMod start -----------------
 type NewObjMod struct {
@@ -8,7 +12,7 @@ type NewObjMod struct {
 	MT4Account *MT4Account
 	RankIndex  int    `xorm:"RankIndex"`
 	Lang       string `xorm:"Lang"`
-	RankName   string `xorm:"RankName"`
+	BindTime   time.Time
 }
 
 func (*NewObjMod) TableName() string {
@@ -19,6 +23,7 @@ func NewNewObjMod(in *pb.NewObjMod) *NewObjMod {
 	out := &NewObjMod{}
 	out.RankIndex = int(in.RankIndex)
 	out.Lang = in.Lang.String()
+	out.BindTime = time.Unix(in.BindTime, 0)
 	return out
 }
 
@@ -27,7 +32,7 @@ func (in *NewObjMod) ToProto() *pb.NewObjMod {
 	out.MT4Account = in.MT4Account.ToProto()
 	out.RankIndex = int32(in.RankIndex)
 	out.Lang = pb.LanguageType(pb.LanguageType_value[in.Lang])
-	out.RankName = in.RankName
+	out.BindTime = in.BindTime.Unix()
 	return out
 }
 

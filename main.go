@@ -3,8 +3,6 @@ package main
 import (
 	"fmt"
 	"reflect"
-
-	"github.com/Knowckx/Asuka/asuka"
 )
 
 type Test struct {
@@ -17,16 +15,9 @@ func (t *Test) PrintField() {
 }
 
 func main() {
-	// ss := "userId_account_brokerId"
-	// rst := strings.Split(ss, "_")
-	// asuka.Display(rst)
-	ints := []int32{1, 5, 45, 4, 2}
-
-	ss := asuka.SliceToString(ints)
-	fmt.Println(ss)
-	a := asuka.StringToSlice(ss)
-	fmt.Println(a)
-
+	// 泛型
+	fmt.Printf("%d", 100)
+	fmt.Printf("%d", int32(100))
 }
 
 type AA struct {
@@ -36,7 +27,7 @@ type AA struct {
 }
 
 func test() {
-	asuka.Test()
+	// asuka.Test()
 
 }
 
