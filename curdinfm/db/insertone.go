@@ -3,7 +3,6 @@ package db
 import (
 	"fmt"
 
-	"github.com/Knowckx/Asuka/curdinfm/mod"
 	"github.com/xormplus/xorm"
 )
 
@@ -28,14 +27,4 @@ func DBInsertOne(tx *xorm.Session, tname string, data interface{}) (int, error) 
 		return 0, fmt.Errorf("unexpect offset %d", offset)
 	}
 	return maxIDNow, nil
-}
-
-func GetMaxIDFromTable(tx *xorm.Session, tname string) (int, error) {
-	sql := fmt.Sprintf(`select MAX(ID) as ID from %s`, tname)
-	maxID := &mod.MaxID{}
-	_, err := tx.SQL(sql).Get(maxID)
-	if err != nil {
-		return -1, err
-	}
-	return maxID.ID, nil
 }

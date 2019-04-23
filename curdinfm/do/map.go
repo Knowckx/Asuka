@@ -7,7 +7,7 @@ func MakeAccMap(ins []*mod.MT4Account) *mod.MT4AccData {
 	rstMap := mod.MT4AccData{} //组装索引map
 	for _, in := range ins {
 		objMod := new(mod.NewObjMod)
-		objMod.MT4Account = in
+		objMod.MT4Account = *in
 		rstMap[*in] = objMod
 	}
 	return &rstMap
@@ -18,7 +18,7 @@ func MakeAccMap2(ins []*mod.NewObjMod) *mod.MT4AccData {
 	rstMap := mod.MT4AccData{} //组装索引map
 	for _, in := range ins {
 		mt4acc := in.MT4Account
-		rstMap[*mt4acc] = in
+		rstMap[mt4acc] = in
 	}
 	return &rstMap
 }

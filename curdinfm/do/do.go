@@ -20,9 +20,9 @@ func DelNewObjMod(l *mod.RankIndexWithLang) error {
 	return err
 }
 
-func GetNewObjMods(RankIndex int) (mod.NewObjMods, error) {
+func GetNewObjMods(se *mod.NewObjModSearch) (mod.NewObjMods, error) {
 	session := dbs.Session()
-	out, err := db.GetNewObjMods(session, RankIndex)
+	out, err := db.GetNewObjMods(session, se)
 	return out, err
 }
 

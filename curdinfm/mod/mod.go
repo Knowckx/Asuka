@@ -8,31 +8,33 @@ import (
 
 //----------------- Mod NewObjMod start -----------------
 type NewObjMod struct {
-	ID         int `xorm:"ID"`
-	MT4Account *MT4Account
-	RankIndex  int    `xorm:"RankIndex"`
-	Lang       string `xorm:"Lang"`
-	BindTime   time.Time
+	ID         int        `xorm:"ID"`
+	UserID     int        `xorm:"UserID"`
+	NickName   string     `xorm:"NickName"`
+	Lang       string     `xorm:"Lang"`
+	CreateTime *time.Time `xorm:"CreateTime"`
+	MT4Account `xorm:"extends"`
 }
 
 func (*NewObjMod) TableName() string {
 	return "t_new_obj"
 }
 
-func NewNewObjMod(in *pb.NewObjMod) *NewObjMod {
+func NewNewObjModPB(in *pb.NewObjMod) *NewObjMod {
 	out := &NewObjMod{}
-	out.RankIndex = int(in.RankIndex)
+	out.UserID = int(in.UserID)
+	out.NickName = in.NickName
 	out.Lang = in.Lang.String()
-	out.BindTime = time.Unix(in.BindTime, 0)
+	// out.CreateTime = time.Unix(in.CreateTime, 0) //理论上不需要前端的CreateTime
 	return out
 }
 
 func (in *NewObjMod) ToProto() *pb.NewObjMod {
 	out := &pb.NewObjMod{}
-	out.MT4Account = in.MT4Account.ToProto()
-	out.RankIndex = int32(in.RankIndex)
+	out.ID = int32(in.ID)
+	out.Acc = in.MT4Account.ToProto()
 	out.Lang = pb.LanguageType(pb.LanguageType_value[in.Lang])
-	out.BindTime = in.BindTime.Unix()
+	out.CreateTime = in.CreateTime.Unix()
 	return out
 }
 
@@ -48,6 +50,25 @@ func (ins *NewObjMods) ToProto() []*pb.NewObjMod {
 }
 
 //----------------- Mod NewObjMod end -----------------
+
+//----------------- Mod NewObjModSearch Start -----------------
+type NewObjModSearch struct {
+	UserID   int32
+	NickName string
+	Account  string
+	Page     *PageOp
+}
+
+func NewNewObjModSearchPB(in *pb.NewObjModSearch) *NewObjModSearch {
+	out := &NewObjModSearch{}
+	out.UserID = in.UserID
+	out.NickName = in.NickName
+	out.Account = in.Account
+	out.Page = NewPageOpPB(in.Page)
+	return out
+}
+
+//----------------- Mod NewObjModSearch end -----------------
 
 // --- 为了测试
 type RankIndexWithLang struct {

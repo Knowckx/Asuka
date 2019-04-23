@@ -3,20 +3,22 @@ syntax = "proto3";
 package pb;
 
 
-// ----------------- 排行榜配置外语翻译文本 message start -----------------
+// ----------------- message 排行榜配置外语翻译文本  start -----------------
 
 // 新的物体
 message NewObjMod {
-    MT4Account    MT4Account     = 1;  // 其他mod
-    int32         RankIndex      = 2;  // 本条翻译对应的榜单配置位置序号
-    LanguageType  Lang           = 3;  // 语言标识
-    string        RankName       = 4;  // 排行榜名称
-    int64         BindTime       = 5;  // 时间类型
+    int32       ID          = 1; // 唯一ID
+    int32       UserID      = 2; // UserID
+    string      NickName    = 3; // 昵称
+    MT4Account  Acc         = 4; // mt4账户 其他mod
+    int64       CreateTime  = 5; // 创建时间
+    LanguageType Lang       = 6;
 }
+
 
 // 很多物体们
 message NewObjMods {
-    repeated NewObjMod Mods      = 1; 
+    repeated NewObjMod List = 1; 
 }
 
 // 枚举
@@ -26,31 +28,39 @@ enum LanguageType {
     en_US = 2;   // 英语 美国
 }
 
-
-message MT4Account {
-    int32   BrokerID       = 1;  //经纪商ID
-    string  Account        = 2;  //账户
+// 新物体的查询
+message NewObjModSearch {
+    int32 UserID        = 1;
+    string NickName     = 2;
+    string Account      = 3;  
+    PageOp Page         = 4;
 }
+
+
+
+
+
 // ----------------- 排行榜配置外语翻译文本 message end -----------------
 
 
 // 定义接口
 service XXXXSrv {
     
-// ----------------- 排行榜配置外语翻译文本 start -----------------
-    // OA 增加 榜单配置对应的外语文本
+// -----------------RPC 排行榜配置外语翻译文本 start -----------------
+    // 增加 
     rpc AddNewObjMod(NewObjMod) returns (EmptyMessage) {}
 
-    // OA 删除 某个榜单的外语文本
-    rpc DelNewObjMod(RankIndexWithLang) returns (EmptyMessage) {}
+    // 删除 
+    rpc DelNewObjMod(ID) returns (EmptyMessage) {}
 
-    // OA 查询 某个榜单全部的外语文本
-    rpc GetNewObjMods(RankIndexWithLang) returns (NewObjMods) {}
+    // 查询 
+    rpc GetNewObjMods(NewObjMod) returns (NewObjMods) {}
     
     // OA 修改 榜单配置对应的外语文本
     rpc UpdateNewObjMod(NewObjMod) returns (EmptyMessage) {}
 
-// ----------------- 排行榜配置外语翻译文本 end -----------------
+
+// -----------------RPC 排行榜配置外语翻译文本 end -----------------
 
 }
 
@@ -65,9 +75,22 @@ message RankIndexWithLang {
 }
 
 
-
-
-
-
 // 为了测试
 message EmptyMessage {}
+
+//数据库ID
+message ID {
+    int64   ID   = 1;  //数据库ID
+}
+
+message PageOp {
+    string  OrderBy     = 1; //排序字段名称
+    bool    IsDESC      = 2; //true:从大到小排列   false:从小到大排列
+    int32   PageIndex   = 3; //页面序号，从0开始
+    int32   PageSize    = 4; //每页的数量
+}
+
+message MT4Account {
+    int32   BrokerID       = 1;  //经纪商ID
+    string  Account        = 2;  //账户
+}

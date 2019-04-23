@@ -9,14 +9,20 @@ import (
 
 //----------------- NewObjMod CURD start -----------------
 
-// 增：一个配置
-func AddNewObjMod(tx *xorm.Session, l *mod.NewObjMod) error {
-	_, err := tx.InsertOne(l)
-	return err
+// 增：一条数据
+func AddNewObjMod(tx *xorm.Session, in *mod.NewObjMod) error {
+	_, err := tx.InsertOne(in)
+	if err != nil {
+		return fmt.Errorf("InsertOne To DB failed,%s", err)
+	}
+	return nil
 }
 
 // 增：批量
 func AddNewObjMods(tx *xorm.Session, l []*mod.NewObjMod) error {
+	if len(l) == 0 {
+		return nil
+	}
 	_, err := tx.Insert(&l)
 	return err
 }
@@ -41,9 +47,17 @@ func GetNewObjMod(tx *xorm.Session, RankIndex int, Lang string) (*mod.NewObjMod,
 }
 
 // 查：一组
-func GetNewObjMods(tx *xorm.Session, RankIndex int) (mod.NewObjMods, error) {
-	out := []*mod.NewObjMod{}
-	err := tx.Where("RankIndex = ?", RankIndex).Find(&out)
+func GetNewObjMods(tx *xorm.Session, se *mod.NewObjModSearch) (mod.NewObjMods, error) {
+	out := mod.NewObjMods{}
+	if se != nil {
+		if se.UserID != 0 {
+			tx.And("UserID = ?", se.UserID)
+		}
+		if se.NickName != "" {
+			tx.And("NickName = ?", se.NickName)
+		}
+	}
+	err := tx.Find(&out)
 	return out, err
 }
 
@@ -59,7 +73,7 @@ func GetUsers(tx *xorm.Session, ins mod.MT4Accounts) (mod.NewObjMods, error) {
 
 // 查：更新
 func UpdateNewObjMod(tx *xorm.Session, l *mod.NewObjMod) error {
-	count, err := tx.Where("RankIndex = ? and Lang = ?", l.RankIndex, l.Lang).Update(l)
+	count, err := tx.Where("BrokerID = ? and Lang = ?", l.BrokerID, l.Lang).Update(l)
 	if err != nil {
 		return err
 	}
@@ -70,18 +84,3 @@ func UpdateNewObjMod(tx *xorm.Session, l *mod.NewObjMod) error {
 }
 
 //----------------- NewObjMod CURD end -----------------
-
-//----------------- xorm CURD start -----------------
-
-// 裸SQL的使用
-func GetMaxIDFromTable(tx *xorm.Session, tname string) (int, error) {
-	sqlStr := fmt.Sprintf(`select MAX(ID) as ID from %s`, tname)
-	maxID := &mod.MaxID{}
-	_, err := tx.SQL(sqlStr).Get(maxID)
-	if err != nil {
-		return -1, err
-	}
-	return maxID.ID, nil
-}
-
-//----------------- xorm CURD end -----------------

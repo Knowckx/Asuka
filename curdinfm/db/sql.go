@@ -7,6 +7,21 @@ import (
 	"github.com/xormplus/xorm"
 )
 
+//----------------- xorm CURD start -----------------
+
+// 裸SQL的使用
+func GetMaxIDFromTable(tx *xorm.Session, tname string) (int, error) {
+	sqlStr := fmt.Sprintf(`select MAX(ID) as ID from %s`, tname)
+	maxID := &mod.MaxID{}
+	_, err := tx.SQL(sqlStr).Get(maxID)
+	if err != nil {
+		return -1, err
+	}
+	return maxID.ID, nil
+}
+
+//----------------- xorm CURD end -----------------
+
 // 拼SQL  fmt 裸语句   XX and (a or b or c)
 func GetS4FollowProfits(tx *xorm.Session, accs mod.MT4Accounts) (mod.MT4Accounts, error) {
 	out := mod.MT4Accounts{}

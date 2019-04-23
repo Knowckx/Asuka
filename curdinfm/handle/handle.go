@@ -12,17 +12,13 @@ import (
 // ----------------- 排行榜配置外语翻译文本 start -----------------
 // OA 增加 榜单配置对应的外语文本
 func (*DatastatisticSrv) AddNewObjMod(ctx context.Context, in *pb.NewObjMod, out *pb.EmptyMessage) error {
-	err := checkArgsNewObjMod(in.RankIndex, int32(in.Lang))
+	err := CheckArgsMT4Account(in.Acc)
 	if err != nil {
 		return err
 	}
-	cfg := mod.NewNewObjMod(in)
-
-	err = do.AddNewObjMod(cfg)
-	if err != nil {
-		return err
-	}
-	return nil
+	args := mod.NewNewObjModPB(in)
+	err = do.AddNewObjMod(args)
+	return err
 }
 
 func (*DatastatisticSrv) DelNewObjMod(ctx context.Context, in *pb.RankIndexWithLang, out *pb.EmptyMessage) error {
@@ -32,30 +28,25 @@ func (*DatastatisticSrv) DelNewObjMod(ctx context.Context, in *pb.RankIndexWithL
 	}
 	cfg := mod.NewRankIndexWithLang(in)
 	err = do.DelNewObjMod(cfg)
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
 
-func (*DatastatisticSrv) GetNewObjMods(ctx context.Context, in *pb.RankIndexWithLang, reply *pb.NewObjMods) error {
-	if in.RankIndex == 0 {
-		return fmt.Errorf("rank index should not be 0")
-	}
-	out, err := do.GetNewObjMods(int(in.RankIndex))
+func (*DatastatisticSrv) GetNewObjMods(ctx context.Context, in *pb.NewObjModSearch, reply *pb.NewObjMods) error {
+	ars := mod.NewNewObjModSearchPB(in)
+	out, err := do.GetNewObjMods(ars)
 	if err != nil {
 		return err
 	}
-	reply.Mods = out.ToProto()
+	reply.List = out.ToProto()
 	return nil
 }
 
 func (*DatastatisticSrv) UpdateNewObjMod(ctx context.Context, in *pb.NewObjMod, reply *pb.EmptyMessage) error {
-	err := checkArgsNewObjMod(in.RankIndex, int32(in.Lang))
+	err := checkArgsNewObjMod(in.ID, int32(in.Lang))
 	if err != nil {
 		return err
 	}
-	cfg := mod.NewNewObjMod(in)
+	cfg := mod.NewNewObjModPB(in)
 	err = do.UpdateNewObjMod(cfg)
 	if err != nil {
 		return err
@@ -76,5 +67,15 @@ func checkArgsNewObjMod(RankIndex int32, Lang int32) error {
 
 // ----------------- 排行榜配置外语翻译文本 end -----------------
 
+// ----------------- 参数检查 Start -----------------
+func CheckArgsMT4Account(in *pb.MT4Account) error {
+	err := fmt.Errorf("Args Check failed:MT4Account")
+	if in == nil || in.BrokerID == 0 || in.Account == "" {
+		return err
+	}
+	return nil
+}
+
+// ----------------- 参数检查 end -----------------
 type DatastatisticSrv struct {
 }
