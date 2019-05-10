@@ -37,7 +37,7 @@ func displayPath(path string, v reflect.Value) {
 		}
 	case reflect.Map:
 		for _, key := range v.MapKeys() {
-			fieldPath := fmt.Sprintf("%s[%s]", path, key)
+			fieldPath := fmt.Sprintf("%s[%+v]", path, key)
 			displayPath(fieldPath, v.MapIndex(key))
 		}
 	case reflect.Ptr:
