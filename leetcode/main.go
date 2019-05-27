@@ -8,10 +8,7 @@ import (
 
 func main() {
 	nums := []int{1, 2, 3, 4, 5, 6, 7}
-	Array.Rotate3(nums, 3)
+	Array.ContainsDuplicate(nums)
 	fmt.Println(nums)
 
 }
-
-
-
