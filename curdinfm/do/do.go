@@ -2,8 +2,8 @@ package do
 
 import (
 	"github.com/Knowckx/Asuka/curdinfm/db"
+	dbs "github.com/Knowckx/Asuka/curdinfm/fmut/db"
 	"github.com/Knowckx/Asuka/curdinfm/mod"
-	dbs "gitlab.followme.com/FollowmeGo/utils/db"
 )
 
 //----------------- NewObjMod CURD start -----------------
