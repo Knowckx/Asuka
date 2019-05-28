@@ -1,9 +1,8 @@
 package enum
 
 import (
+	"fmt"
 	"time"
-
-	"gitlab.followme.com/FollowmeGo/utils/log"
 )
 
 const (
@@ -22,7 +21,7 @@ type Time string
 func (in Time) Time() time.Time {
 	out, err := time.ParseInLocation(FormatDayLayoutDetail, string(in), time.Local)
 	if err != nil {
-		log.Errw("time.ParseInLocation", "error", err, "args", in)
+		fmt.Printf("time.ParseInLocation error %s args %s", err, in)
 		out = time.Time{}
 	}
 	return out

@@ -8,7 +8,6 @@ package Array
 // Note:
 // 重复几次就在结果出现几次
 // 不需要按顺序
-// Follow up:
 
 // What if the given array is already sorted? How would you optimize your algorithm?
 // What if nums1's size is small compared to nums2's size? Which algorithm is better?
