@@ -26,7 +26,12 @@ func displayPath(path string, v reflect.Value) {
 	case reflect.Invalid:
 		fmt.Printf("%s = invalid\n", path)
 	case reflect.Slice, reflect.Array:
-		for i := 0; i < v.Len(); i++ {
+		leng := v.Len()
+		if leng > 5 {
+			fmt.Printf("%s Slice.len = %d\n", path, leng)
+			leng = 5
+		}
+		for i := 0; i < leng; i++ {
 			displayPath(fmt.Sprintf("%s[%d]", path, i), v.Index(i))
 		}
 	case reflect.Struct:
