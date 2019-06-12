@@ -16,3 +16,9 @@ func main() {
 
 	fmt.Println(bt)
 }
+
+func Test() {
+	s := []int{2, 3, 5, 7, 11, 13}
+	_ = s
+	// fmt.Println(s[-3:5])
+}
