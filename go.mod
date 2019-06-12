@@ -18,7 +18,7 @@ require (
 	github.com/jtolds/gls v4.2.1+incompatible // indirect
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/lxn/walk v0.0.0-20190527130154-a80ce0edcf28
-	github.com/lxn/win v0.0.0-20190514122436-6f00d814e89c // indirect
+	github.com/lxn/win v0.0.0-20190514122436-6f00d814e89c
 	github.com/mattn/go-sqlite3 v1.10.0 // indirect
 	github.com/micro/go-micro v0.25.0
 	github.com/miekg/dns v1.1.4 // indirect
@@ -28,9 +28,9 @@ require (
 	github.com/xormplus/core v0.0.0-20190120064039-da7907271e2f // indirect
 	github.com/xormplus/xorm v0.0.0-20170323143345-00a2dd62586a
 	golang.org/x/net v0.0.0-20190311183353-d8887717615a
+	golang.org/x/sync v0.0.0-20190423024810-112230192c58 // indirect
 	golang.org/x/sys v0.0.0-20190528012530-adf421d2caf4 // indirect
 	golang.org/x/text v0.3.1-0.20180807135948-17ff2d5776d2 // indirect
-	golang.org/x/tools v0.0.0-20190525145741-7be61e1b0e51 // indirect
 	google.golang.org/appengine v1.4.0 // indirect
 	gopkg.in/Knetic/govaluate.v3 v3.0.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
