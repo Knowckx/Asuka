@@ -21,7 +21,7 @@ func GenNumEditWgs(str string, edit **walk.NumberEdit) []Widget {
 
 func GenNumberEdit(edit **walk.NumberEdit) *NumberEdit {
 	out := &NumberEdit{
-		// Decimals:    3,
+		Decimals: 3,
 		AssignTo: edit,
 		// OnMouseDown: clearEdit,
 	}

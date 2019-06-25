@@ -87,7 +87,7 @@ func MainCalc() {
 	reRate := rate * mainWin.OptionsLever.Value()
 	rst := mainWin.OptionsNow.Value() * (1.0 + reRate)
 	// format
-	sres := fmt.Sprintf("%.2f", rst)
+	sres := fmt.Sprintf("%.3f", rst)
 	mainWin.OptionsPredict.SetText(sres)
 }
 

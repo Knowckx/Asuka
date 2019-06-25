@@ -17,8 +17,8 @@ require (
 	github.com/gopherjs/gopherjs v0.0.0-20181103185306-d547d1d9531e // indirect
 	github.com/jtolds/gls v4.2.1+incompatible // indirect
 	github.com/kr/pretty v0.1.0 // indirect
-	github.com/lxn/walk v0.0.0-20190527130154-a80ce0edcf28
-	github.com/lxn/win v0.0.0-20190514122436-6f00d814e89c
+	github.com/lxn/walk v0.0.0-20190619151032-86d8802c197a
+	github.com/lxn/win v0.0.0-20190618153233-9c04a4e8d0b8
 	github.com/mattn/go-sqlite3 v1.10.0 // indirect
 	github.com/micro/go-micro v0.25.0
 	github.com/miekg/dns v1.1.4 // indirect
