@@ -4,19 +4,64 @@ import (
 	"fmt"
 )
 
-func main() {
-	Atest()
+
+
+func main(){
+	var a interface{} = 215
+	// fmt.Printf("%T",a)
+	fmt.Print(a)
+	fmt.Println(a)
+
+
+
+
+	test()
+	
+	return 
 }
 
 type AA struct {
 	v1 int
 	v2 string
-	v3 float32
+	li []int
+}
+
+func (A AA) Copy() AA {
+	return A
+}
+
+// 数组指针的改变问题
+func testPoint() {
+	lis1 := []int{1, 2, 3, 4, 5}
+	lis2 := lis1
+	pb1 := &lis1
+	pb2 := &lis2
+	fmt.Printf("%p %p %p %p\n", lis1, lis2, pb1, pb2)
+	lis1 = []int{1}
+	fmt.Printf("%v %v", lis1, lis2)
+	fmt.Printf("%v %v", lis1, lis2)
 }
 
 func test() {
-	// asuka.Test()
+	li1 := []int{1, 2, 3, 4, 5}
+	// li2 := make([]int, len(li1))
+	// copy(li2, li1)
 
+	li2 := li1
+	li2[2], li2[1] = li2[1], li2[2] // li2 修改
+	fmt.Println(li1)                // li1 也被修改了！
+	fmt.Println(li2)
+	return
+}
+
+func SliceTest(in *AA) {
+	list := in.li
+	list = list[0:1]
+	in.li = list
+	// fmt.Printf("%p\n", ins)
+	// ins[2] = 10
+	// ins = nil
+	// fmt.Printf("%p\n", ins)
 }
 
 func Display(x interface{}) {

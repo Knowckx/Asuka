@@ -9,7 +9,7 @@ import (
 
 func Display(x interface{}) {
 	name := "Text"
-	fmt.Printf("Display %s (%T):\n", name, x)
+	fmt.Printf("Asuka Display..Target Type:[%T]:\n", name, x)
 	displayPath(name, reflect.ValueOf(x))
 }
 

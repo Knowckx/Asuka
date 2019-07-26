@@ -83,4 +83,14 @@ func UpdateNewObjMod(tx *xorm.Session, l *mod.NewObjMod) error {
 	return err
 }
 
+// 联表查
+func GetJoin(tx *xorm.Session) (mod.NewObjMods, error) {
+	out := []*mod.NewObjMod{}
+	tx = tx.Where("broker_id > ?", 3)
+	tx = tx.And("user_type = ?", 1)
+	tx.Join("INNER", "users", "users.id = user_accounts.user_id")
+	err := tx.Find(&out)
+	return out, err
+}
+
 //----------------- NewObjMod CURD end -----------------
