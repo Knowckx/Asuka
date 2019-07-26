@@ -2,32 +2,80 @@ package main
 
 import (
 	"fmt"
+	"reflect"
+	"time"
+
+	"github.com/Knowckx/Asuka/asuka"
 )
 
 func main() {
-	var a interface{} = 215
-	// fmt.Printf("%T",a)
-	fmt.Print(a)
-	fmt.Println(a)
-	rst := test()
-	fmt.Printf("%T", rst)
+
+	var a interface{} = AA{}
+	a2 := AA{}
+	test22(a)
+	test22(a2)
+
+	// test(1)
+	// var t interface{} = []int{215}
+	// s := reflect.ValueOf(t)
+	// for i := 0; i < s.Len(); i++ {
+	// 	fmt.Println(s.Index(i))
+	// }
 
 	return
 }
 
-//  golang 缺乏总体断言   从 []int   []interface{}
-// 问题就变成了，如何从一个给定的类型，自动创建该类型的slice
-func test(in interface{}) interface{} {
-	outs := make([]interface{}, 0)
-	var a1 interface{} = 10
-	var a3 interface{} = 13
-	var a4 interface{} = 14
+func test22(in interface{}) {
 
-	outs = append(outs, a1)
-	outs = append(outs, a3)
-	outs = append(outs, a4)
-	return outs
+	asuka.Display(in)
 
+}
+
+func test(in interface{}) {
+	// slice := make([]int, 0)
+	slice2 := []int{}
+	t0 := time.Now()
+	// for i := 1; i < 10; i++ {
+	// 	slice = append([]int{i}, slice[0:]...)
+	// 	// slice = append(slice, i)
+
+	// }
+	// fmt.Println(slice)
+
+	t1 := time.Now()
+	for i := 1; i < 10000; i++ {
+		slice2 = Insert(slice2, 0, i).([]int)
+	}
+	t2 := time.Now()
+	fmt.Println(t1.Sub(t0), t2.Sub(t1))
+	fmt.Println(t1.Sub(t0), t2.Sub(t1))
+
+}
+
+func Insert(slice interface{}, pos int, value interface{}) interface{} {
+
+	v := reflect.ValueOf(slice)
+
+	fmt.Println(v.String())
+
+	var aa interface{} = 1
+	var aa1 interface{} = []int{}
+
+	tyaa := reflect.TypeOf(aa)
+	tyaa1 := reflect.TypeOf(aa1)
+
+	fmt.Println(tyaa.String())
+	fmt.Println(tyaa1.String())
+
+	// ne := reflect.MakeSlice(reflect.SliceOf(reflect.TypeOf(value)), 1, 1)
+	ne := reflect.MakeSlice(tyaa1, 1, 1)
+
+	fmt.Println(ne.String())
+
+	ne.Index(0).Set(reflect.ValueOf(value))
+	v = reflect.AppendSlice(v.Slice(0, pos), reflect.AppendSlice(ne, v.Slice(pos, v.Len())))
+
+	return v.Interface()
 }
 
 type AA struct {
