@@ -28,7 +28,7 @@ func displayPath(path string, v reflect.Value) {
 	case reflect.Slice, reflect.Array:
 		leng := v.Len()
 		if leng > 5 {
-			fmt.Printf("%s Slice.len = %d\n", path, leng)
+			fmt.Printf("%s Slice.len = %d show top 5!\n", path, leng)
 			leng = 5
 		}
 		for i := 0; i < leng; i++ {

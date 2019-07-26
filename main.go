@@ -4,20 +4,30 @@ import (
 	"fmt"
 )
 
-
-
-func main(){
+func main() {
 	var a interface{} = 215
 	// fmt.Printf("%T",a)
 	fmt.Print(a)
 	fmt.Println(a)
+	rst := test()
+	fmt.Printf("%T", rst)
 
+	return
+}
 
+//  golang 缺乏总体断言   从 []int   []interface{}
+// 问题就变成了，如何从一个给定的类型，自动创建该类型的slice
+func test(in interface{}) interface{} {
+	outs := make([]interface{}, 0)
+	var a1 interface{} = 10
+	var a3 interface{} = 13
+	var a4 interface{} = 14
 
+	outs = append(outs, a1)
+	outs = append(outs, a3)
+	outs = append(outs, a4)
+	return outs
 
-	test()
-	
-	return 
 }
 
 type AA struct {
@@ -40,18 +50,6 @@ func testPoint() {
 	lis1 = []int{1}
 	fmt.Printf("%v %v", lis1, lis2)
 	fmt.Printf("%v %v", lis1, lis2)
-}
-
-func test() {
-	li1 := []int{1, 2, 3, 4, 5}
-	// li2 := make([]int, len(li1))
-	// copy(li2, li1)
-
-	li2 := li1
-	li2[2], li2[1] = li2[1], li2[2] // li2 修改
-	fmt.Println(li1)                // li1 也被修改了！
-	fmt.Println(li2)
-	return
 }
 
 func SliceTest(in *AA) {
