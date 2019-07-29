@@ -8,21 +8,37 @@ import (
 	"github.com/Knowckx/Asuka/asuka"
 )
 
+// Go里面，函数中实现泛型切片的最佳实践是？
+
+
+type MyInt int
+
+func (MyInt) test(){}
+
 func main() {
-
-	var a interface{} = AA{}
-	a2 := AA{}
-	test22(a)
-	test22(a2)
-
-	// test(1)
-	// var t interface{} = []int{215}
-	// s := reflect.ValueOf(t)
-	// for i := 0; i < s.Len(); i++ {
-	// 	fmt.Println(s.Index(i))
-	// }
-
+	err := reflectDo()
+	fmt.Println("Result:",err)
 	return
+}
+
+func reflectDo() (err error) {
+	defer CheckPanic(&err)
+	var a interface{} = AA{}
+	va := reflect.ValueOf(a)
+	return fmt.Errorf("reflectDo return ")
+	_ = va
+	// panic("!!")
+	va.SetBool(true)
+	fmt.Println("reflectDo End")
+	return nil
+}
+
+
+func CheckPanic(err *error) {
+	p:= recover()
+	if p != nil{
+		*err = fmt.Errorf("CheckPanic Result [%v]",p)
+	}
 }
 
 func test22(in interface{}) {
