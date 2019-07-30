@@ -6,6 +6,11 @@ import (
 	"reflect"
 )
 
+func StartRecover() {
+	err := DoPanic()
+	fmt.Println(err)
+}
+
 // 函数内使用了反射，会产生Panic
 func DoPanic() (err error) {
 	defer CheckPanic(&err)
@@ -21,6 +26,6 @@ func DoPanic() (err error) {
 func CheckPanic(err *error) {
 	p := recover()
 	if p != nil {
-		*err = fmt.Errorf("CheckPanic Result [%v]", p)
+		*err = fmt.Errorf("Panic Error [%v]", p)
 	}
 }

@@ -5,46 +5,18 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/Knowckx/Asuka/asuka"
+	"github.com/Knowckx/Asuka/SnippetsGO"
 )
 
 // Go里面，函数中实现泛型切片的最佳实践是？
 
-
 type MyInt int
 
-func (MyInt) test(){}
+func (MyInt) test() {}
 
 func main() {
-	err := reflectDo()
-	fmt.Println("Result:",err)
+	SnippetsGO.StartRecover()
 	return
-}
-
-func reflectDo() (err error) {
-	defer CheckPanic(&err)
-	var a interface{} = AA{}
-	va := reflect.ValueOf(a)
-	return fmt.Errorf("reflectDo return ")
-	_ = va
-	// panic("!!")
-	va.SetBool(true)
-	fmt.Println("reflectDo End")
-	return nil
-}
-
-
-func CheckPanic(err *error) {
-	p:= recover()
-	if p != nil{
-		*err = fmt.Errorf("CheckPanic Result [%v]",p)
-	}
-}
-
-func test22(in interface{}) {
-
-	asuka.Display(in)
-
 }
 
 func test(in interface{}) {
