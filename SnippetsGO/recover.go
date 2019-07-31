@@ -13,6 +13,7 @@ func StartRecover() {
 
 // 函数内使用了反射，会产生Panic
 func DoPanic() (err error) {
+
 	defer CheckPanic(&err)
 	var a interface{} = 10
 	va := reflect.ValueOf(a)
@@ -22,10 +23,6 @@ func DoPanic() (err error) {
 	return nil
 }
 
-// UT 把panic转换成error
-func CheckPanic(err *error) {
-	p := recover()
-	if p != nil {
-		*err = fmt.Errorf("Panic Error [%v]", p)
-	}
+func GenTestArgs() (int, error) {
+	return 1, fmt.Errorf("123")
 }
