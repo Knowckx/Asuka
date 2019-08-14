@@ -7,11 +7,28 @@ import (
 )
 
 func main() {
-	Test()
+	// var a1 AA
+	// pa := &a1
+	// pa.D1()
+	// pa.D2()
+
+	TestOnlyOne2()
+	// Test()
 }
 
 type AA int
+
+// 指针方法
+func (in *AA) D1(){
+	fmt.Println("D1")
+}
+
+// 值方法
+func (in AA) D2(){
+	fmt.Println("D2")
+}
 type BB int
+
 
 func Test() {
 	var a AA = 1
