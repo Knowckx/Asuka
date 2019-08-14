@@ -5,13 +5,12 @@ import (
 	"time"
 
 	"github.com/Knowckx/Asuka/SnippetsGO/onlyone"
-	"github.com/Knowckx/Asuka/asuka"
 )
 
 //--------------------------------------------模型1 使用ch来完成，保证唯一执行的lock功能
 func TestOnlyOne2() {
 	one := onlyone.GetOnlyOneCh()
-	asuka.Display()
+	// asuka.Display()
 
 	for i := 0; i < 3; i++ {
 		for j := 0; j <= 1000; j++ {
