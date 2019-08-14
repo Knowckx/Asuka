@@ -1,5 +1,7 @@
 github.com/Chronokeeper/anyxml v0.0.0-20160530174208-54457d8e98c6 h1:Etfj2lhXyrYemgmWzEtEQQb1kezeEXc8jVjkQUyJnWI=
 github.com/Chronokeeper/anyxml v0.0.0-20160530174208-54457d8e98c6/go.mod h1:YzuYAe2hrrwKXkM9kqjbkTLlkbA+/xw2MA46f1+ENxc=
+github.com/Knowckx/Asuka v0.0.0-20190814103642-039523892a1e h1:dSJS3z0N6CVROMYz8AmGTbFFF/9ZW2DNDvQ60/O74dc=
+github.com/Knowckx/Asuka v0.0.0-20190814103642-039523892a1e/go.mod h1:NlwAX5jwB+fneES+cqdxdvwAsxXPze9QKREWyAnM5ak=
 github.com/Unknwon/goconfig v0.0.0-20181105214110-56bd8ab18619 h1:6X8iB881g299aNEv6KXrcjL31iLOH7yA6NXoQX+MbDg=
 github.com/Unknwon/goconfig v0.0.0-20181105214110-56bd8ab18619/go.mod h1:wngxua9XCNjvHjDiTiV26DaKDT+0c63QR6H5hjVUUxw=
 github.com/agrison/go-tablib v0.0.0-20160310143025-4930582c22ee h1:0RklYSvekYaIFI9JUx7TFPQvo++TdILmZiV17QI4nXk=
@@ -63,8 +65,6 @@ github.com/kr/text v0.1.0 h1:45sCR5RtlFHMR4UwH9sdQ5TC8v0qDQCHnXt+kaKSTVE=
 github.com/kr/text v0.1.0/go.mod h1:4Jbv+DJW3UT/LiOwJeYQe1efqtUx/iVham/4vfdArNI=
 github.com/lxn/walk v0.0.0-20190619151032-86d8802c197a h1:6OEIaT0kMsN7UYnMK3i9JqwDMIyUtVYMfVNyjvhX98w=
 github.com/lxn/walk v0.0.0-20190619151032-86d8802c197a/go.mod h1:E23UucZGqpuUANJooIbHWCufXvOcT6E7Stq81gU+CSQ=
-github.com/lxn/win v0.0.0-20190514122436-6f00d814e89c h1:RmJqAqztNMamrAAP8zti9PbuD4D897Wa//LHSAh9Vow=
-github.com/lxn/win v0.0.0-20190514122436-6f00d814e89c/go.mod h1:oO6+4g3P1GcPAG7LPffwn8Ye0cxW0goh0sUZ6+lRFPs=
 github.com/lxn/win v0.0.0-20190618153233-9c04a4e8d0b8 h1:Pc9Zy7abNYw7nYW2c/XbLSRUq8Fu6+bnUvDNf2v7g30=
 github.com/lxn/win v0.0.0-20190618153233-9c04a4e8d0b8/go.mod h1:oO6+4g3P1GcPAG7LPffwn8Ye0cxW0goh0sUZ6+lRFPs=
 github.com/mattn/go-colorable v0.0.9/go.mod h1:9vuHe8Xs5qXnSaW/c/ABM9alt+Vo+STaOChaDxuIBZU=
