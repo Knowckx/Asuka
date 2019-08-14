@@ -1,4 +1,4 @@
-package OnlyOne
+package onlyone
 
 import (
 	"fmt"

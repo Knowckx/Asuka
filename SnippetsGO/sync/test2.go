@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Knowckx/Asuka/SnippetsGO/onlyone"
+	"github.com/Knowckx/Asuka/src/SnippetsGO/onlyone"
 )
 
 //--------------------------------------------模型1 使用ch来完成，保证唯一执行的lock功能
