@@ -30,6 +30,9 @@ func NewNewObjModPB(in *pb.NewObjMod) *NewObjMod {
 }
 
 func (in *NewObjMod) ToProto() *pb.NewObjMod {
+	if in == nil {
+		return nil
+	}
 	out := &pb.NewObjMod{}
 	out.ID = int32(in.ID)
 	out.Acc = in.MT4Account.ToProto()
