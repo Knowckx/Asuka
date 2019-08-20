@@ -4,6 +4,7 @@
 CREATE TABLE IF NOT EXISTS `t_ltl_season` (
 		`ID` INT NOT NULL auto_increment PRIMARY KEY COMMENT '唯一ID',
 		`Name` VARCHAR ( 64 ) NOT NULL COMMENT '名称',
+		`Season` INT NOT NULL COMMENT '赛季编号',
 		`Text` Text COMMENT '大赛描述',
 		`Admin` VARCHAR ( 64 ) NOT NULL COMMENT '负责人',
 		`SignupStart` TIMESTAMP NOT NULL COMMENT '报名开始时间',
@@ -17,7 +18,6 @@ CREATE TABLE IF NOT EXISTS `t_ltl_season` (
 		`UpdateTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) CHARACTER SET = utf8mb4 COMMENT = '交易大赛赛季表';
 
-Insert into t_ltl_season values (null ,"S5交易大赛" , "Followme《我是交易员》职业联赛S5赛季","","2019-09-01","2019-10-30","2019-09-01","2019-11-30",2,1,null,null);
 
 
 -- 交易大赛 参赛人员每日状态记录表
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `t_ltl_rankmap` (
 		`TimeIndex` varchar(64) NOT NULL COMMENT '对应大赛的时间周期',
 		`StartAt` TIMESTAMP NOT NULL COMMENT '统计周期的起点',
 		`EndAt` TIMESTAMP NOT NULL COMMENT '统计周期的终点',
-		`CalcTime` TIMESTAMP NOT NULL COMMENT '榜单实际生成日期',
+		-- `CalcTime` TIMESTAMP NOT NULL COMMENT '榜单实际生成日期',
 		INDEX `idx_unique_rank`(`RankType`, `TimeIndex`) USING BTREE
 ) CHARACTER SET = utf8mb4 COMMENT = '交易大赛 榜单定位器';
 
