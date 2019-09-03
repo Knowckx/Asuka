@@ -43,9 +43,9 @@ func (in *NewObjMod) ToProto() *pb.NewObjMod {
 
 type NewObjMods []*NewObjMod
 
-func (ins *NewObjMods) ToProto() []*pb.NewObjMod {
-	outs := []*pb.NewObjMod{}
-	for _, in := range *ins {
+func (ins NewObjMods) ToProto() []*pb.NewObjMod {
+	outs := make([]*pb.NewObjMod, 0, len(ins))
+	for _, in := range ins {
 		out := in.ToProto()
 		outs = append(outs, out)
 	}
