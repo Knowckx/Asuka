@@ -39,6 +39,24 @@ func DelNewObjMod(tx *xorm.Session, RankIndex int, Lang string) error {
 	return nil
 }
 
+// 删：很多账户
+func DelAccs(tx *xorm.Session, accs mod.MT4Accounts) error {
+	if len(accs) == 0 {
+		return nil
+	}
+	for _, acc := range accs {
+		tx = tx.Or("BrokerID = ? and Account = ?", acc.BrokerID, acc.Account)
+	}
+	count, err := tx.Delete(new(mod.NewObjMod))
+	if err != nil {
+		return err
+	}
+	if count == 0 {
+		return fmt.Errorf("delete result:affected row is 0")
+	}
+	return nil
+}
+
 // 查：一个 通过特定标识
 func GetNewObjMod(tx *xorm.Session, RankIndex int, Lang string) (*mod.NewObjMod, error) {
 	out := &mod.NewObjMod{}
