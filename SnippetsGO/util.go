@@ -31,21 +31,6 @@ func SliceToString(x interface{}) string {
 	return ss
 }
 
-func SliceInt32ToString(ins []int32) string {
-	ss := ""
-	if len(ss) == 0 {
-		return ss
-	}
-	for _, in := range ins {
-		if ss == "" {
-			ss = fmt.Sprintf("%d", in)
-			continue
-		}
-		ss = fmt.Sprintf("%s_%d", ss, in)
-	}
-	return ss
-}
-
 func StringToSlice(ss string) []string {
 	outs := strings.Split(ss, "_")
 	return outs
