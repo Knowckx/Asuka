@@ -15,7 +15,6 @@ func IntsToString(bids []int) string {
 			continue
 		}
 		out = fmt.Sprintf("%s,%d", out, bid)
-
 	}
 	return out
 }

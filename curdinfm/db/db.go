@@ -82,6 +82,9 @@ func GetNewObjMods(tx *xorm.Session, se *mod.NewObjModSearch) (mod.NewObjMods, e
 // 查：一组  来很多MT4账户
 func GetUsers(tx *xorm.Session, ins mod.MT4Accounts) (mod.NewObjMods, error) {
 	out := []*mod.NewObjMod{}
+	if ins == nil || len(ins) == 0 { //防止查全表
+		return out, nil
+	}
 	for _, in := range ins {
 		tx = tx.Or("BrokerID = ? and Account = ?", in.BrokerID, in.Account)
 	}
