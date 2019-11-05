@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `t_customrank_config` (
 
 
 -- 哪个库
-using copytrading;
+use copytrading;
 
 ------- 表结构修改修改
 -- 加个字段
