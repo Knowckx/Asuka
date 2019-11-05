@@ -5,7 +5,8 @@ import (
 )
 
 func main() {
-	test()
+	fmt.Println("asuka hello world")
+	// test()
 }
 
 func test() {

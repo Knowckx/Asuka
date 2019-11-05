@@ -3,6 +3,7 @@ module github.com/Knowckx/Asuka
 go 1.12
 
 replace (
+	github.com/hashicorp/consul => github.com/hashicorp/consul v1.5.1
 	github.com/micro/go-micro => github.com/micro/go-micro v0.6.0
 	github.com/xormplus/xorm => github.com/xormplus/xorm v0.0.0-20170323143345-00a2dd62586a
 )
