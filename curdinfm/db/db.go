@@ -9,13 +9,10 @@ import (
 
 //----------------- NewObjMod CURD start -----------------
 
-// 增：一条数据
-func AddNewObjMod(tx *xorm.Session, in *mod.NewObjMod) error {
-	_, err := tx.InsertOne(in)
-	if err != nil {
-		return fmt.Errorf("InsertOne To DB failed,%s", err)
-	}
-	return nil
+// 增 插入1项  | beta.ID 就是本条记录在数据库的ID
+func InsertOneToDB(tx *xorm.Session, bean interface{}) error {
+	_, err := tx.InsertOne(bean)
+	return err
 }
 
 // 增：批量
@@ -58,15 +55,34 @@ func DelAccs(tx *xorm.Session, accs mod.MT4Accounts) error {
 }
 
 // 查：一个 通过特定标识
-func GetNewObjMod(tx *xorm.Session, RankIndex int, Lang string) (*mod.NewObjMod, error) {
-	out := &mod.NewObjMod{}
-	_, err := tx.Where("RankIndex = ? and Lang = ?", RankIndex, Lang).Get(out)
+func GetUser(tx *xorm.Session, in mod.MT4Account) (*mod.User, error) {
+	out := &mod.User{}
+	exist, err := tx.Where("BrokerID = ? and Account = ?", in.BrokerID, in.Account).Get(out)
+	if !exist {
+		return nil, fmt.Errorf("query brokerid %d accnout %s return null", in.BrokerID, in.Account)
+	}
 	return out, err
+}
+
+// 查一个，借助查多个的函数
+func GetMgoAllAccInfo(tx *mgo.Database, in *mod.MT4Account) (*mod.MgoAllAccInfo, error) {
+	req := mod.MT4Accounts{in}
+	lis, err := GetMgoAllAccInfos(tx, req)
+	if err != nil {
+		return nil, err
+	}
+	if len(lis) != 1 {
+		return nil, fmt.Errorf("GetMgoAllAccInfo unexpected len %d", len(lis))
+	}
+	return lis[0], nil
 }
 
 // 查：一组
 func GetNewObjMods(tx *xorm.Session, se *mod.NewObjModSearch) (mod.NewObjMods, error) {
 	out := mod.NewObjMods{}
+	if in.UID == 0 && in.Account == "" { // 防止扫描全表
+		return outs, nil
+	}
 	if se != nil {
 		if se.UserID != 0 {
 			tx.And("UserID = ?", se.UserID)
