@@ -2,19 +2,14 @@ package main
 
 import (
 	"fmt"
+
+	dp "github.com/Knowckx/Asuka/leetcode/dp"
 )
 
 func main() {
-	nums := []int{3, 2, 4}
-	// tar := 6
-	// res := Array.TwoSum(nums, tar)
-
-	tar := nums[0]
-	_ = tar
-
-	bt := byte(3)
-
-	fmt.Println(bt)
+	// dp.CB2(5)
+	rst := dp.CB22(3, 2)
+	fmt.Println(rst)
 }
 
 func Test() {
