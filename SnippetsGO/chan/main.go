@@ -1,13 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-import "time"
-
-func main() {
-	TestChan()
-}
-
+// 模式：通过chan来通知停止工作
 func TestChan() {
 	stopCh := make(chan int) // 结束信号
 	go Worker(stopCh)
@@ -28,11 +26,4 @@ func Worker(stop chan int) {
 			time.Sleep(2 * time.Second)
 		}
 	}
-}
-
-func WriteChan(ch chan<- int) {
-	ch <- 1
-	ch <- 2
-	close(ch)
-	fmt.Println("Do Close")
 }

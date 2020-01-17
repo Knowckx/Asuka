@@ -9,7 +9,7 @@ type ListNode struct {
 	1 -> 2 -> 3 -> 4 -> nil
 	思维过程：
 	抽取最小重复逻辑，假如目前在cur = 3位置
-	我们希望cur.next = 2，那就需要一个pre变量记录2
+	我们希望cur.next = 2，那肯定需要一个pre变量记录2的位置
 	cur.next = 2会导致3.next丢失。需要一个temp先来记录3.next
 	这些操作之后，3已经指向2了，我们需要前进
 	pre,cur都要向前，cur正好 = temp pre=cur也就是目前的根结点

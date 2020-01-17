@@ -31,6 +31,7 @@ require (
 	github.com/mitchellh/hashstructure v1.0.0 // indirect
 	github.com/pborman/uuid v1.2.0 // indirect
 	github.com/pkg/errors v0.8.1 // indirect
+	github.com/shopspring/decimal v0.0.0-20200105231215-408a2507e114
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/tealeg/xlsx v1.0.5 // indirect
 	github.com/xormplus/core v0.0.0-20190724072625-00f5a85ad6e0 // indirect
