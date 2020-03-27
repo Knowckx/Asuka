@@ -1,0 +1,351 @@
+package femod
+
+import (
+	"bytes"
+	"fmt"
+	"time"
+
+	"gitlab.followme.com/CopyTradingGo/ltl-srv/src/ltl/mod"
+)
+
+//----------------- 净值曲线相关 start -----------------
+// 使用基金净值法来表示账户净值
+type FundEquity struct {
+	NAV  float64 // 单位净值 net asset value
+	Unit float64 // 份额数
+}
+
+func InitFundEquity(in float64) *FundEquity {
+	out := new(FundEquity)
+	out.NAV = 1 //初始单位净值总为1
+	out.Unit = in
+	return out
+}
+
+func NewFundEquity(nav, Unit float64) *FundEquity {
+	out := new(FundEquity)
+	out.NAV = nav
+	out.Unit = Unit
+	return out
+}
+
+func (fe *FundEquity) Copy() *FundEquity {
+	out := new(FundEquity)
+	out.NAV = fe.NAV
+	out.Unit = fe.Unit
+	return out
+}
+
+// 当前基金总净值
+func (fe *FundEquity) TotalCap() float64 {
+	return fe.NAV * fe.Unit
+}
+
+// 1.订单事件-出入金
+func (fe *FundEquity) Deposit(amount float64) *FundEquity {
+	out := fe.Copy()
+	if amount == 0 {
+		return out
+	}
+	count := amount / fe.NAV //本次变动的份额
+	out.Unit = fe.Unit + count
+	return out
+}
+
+// 2.订单事件-利润  rate 相对本金的利润百分比
+func (fe *FundEquity) Profit(rate float64) *FundEquity {
+	out := fe.Copy()
+	if rate == 0 {
+		return out
+	}
+	out.NAV = out.NAV + out.NAV*rate
+	return out
+}
+
+// 时间 - 净值
+type FundEquityPoint struct {
+	Time time.Time
+	*FundEquity
+}
+
+func (fes FundEquityPoint) String() string {
+	return fmt.Sprintf("time:%v Nav:%f Unit:%f Total:%f", fes.Time, fes.NAV, fes.Unit, fes.TotalCap())
+}
+
+func NewFundEquityPoint(time time.Time, value FundEquity) *FundEquityPoint {
+	out := &FundEquityPoint{}
+	out.Time = time
+	out.FundEquity = &value
+	return out
+}
+
+// 净值历史
+type FundEquityHis []*FundEquityPoint
+
+func (fes FundEquityHis) Last() *FundEquityPoint {
+	if len(fes) > 0 {
+		return fes[len(fes)-1]
+	}
+	return nil
+}
+
+func (fes *FundEquityHis) ToCurve() *mod.ChartCurve {
+	curve := mod.ChartCurve{}
+	for _, fe := range *fes {
+		cp := mod.NewChartPoint(fe.Time, fe.NAV)
+		curve = append(curve, cp)
+	}
+	return &curve
+}
+
+func (fes FundEquityHis) String() string {
+	var outs bytes.Buffer
+	for _, fe := range fes {
+		out := fmt.Sprintf("%s\n", fe)
+		outs.WriteString(out)
+	}
+	return outs.String()
+}
+
+// time - value 表示的走势图曲线 比如复权后的净值曲线
+type ChartCurve []*ChartPoint
+
+// 计算最大回撤
+func (cc ChartCurve) GetMaxDD() *MaxDD {
+	maxDD := NewMaxDD()
+	if len(cc) < 2 {
+		return maxDD
+	}
+
+	maxP := cc[0].Copy()
+	for _, c := range cc {
+		cur := c.Copy()
+		if maxP.Value <= cur.Value {
+			maxP = cur
+			continue
+		}
+		curRate := (maxP.Value - cur.Value) / maxP.Value
+		if curRate > maxDD.Value {
+			maxDD.Value = curRate
+			maxDD.StartPoint = maxP
+			maxDD.EndPoint = cur
+		}
+	}
+	return maxDD
+}
+
+// 计算ROI
+func (cc ChartCurve) GetROI() float64 {
+	roi := 0.0
+	if len(cc) < 2 || cc[0].Value == 0 {
+		return roi
+	}
+	roi = cc[len(cc)-1].Value/cc[0].Value - 1
+	return roi
+}
+
+// 截取某个子段时间里的曲线
+func (ins ChartCurve) Cut(tr TimeRange) ChartCurve {
+	outs := make(ChartCurve, 0, len(ins))
+	for _, in := range ins {
+		// fmt.Printf("%s %s\n", in.Time, tr)
+		if tr.InRange(in.Time) {
+			outs = append(outs, in)
+		}
+	}
+	return outs
+}
+
+//最大回撤
+type MaxDD struct {
+	Value      float64     //最大回撤值
+	StartPoint *ChartPoint //最大回撤对应的高点
+	EndPoint   *ChartPoint //最大回撤对应的底点
+}
+
+func (in MaxDD) String() string {
+	return fmt.Sprintf("MaxDD:%f Start:%s End:%s", in.Value, in.StartPoint, in.EndPoint)
+}
+
+type TimeRange struct {
+	StartTime time.Time
+	EndTime   time.Time
+}
+
+func NewTimeRangePB(in *pb.TimeRange) *TimeRange {
+	out := &TimeRange{}
+	if in == nil {
+		return out
+	}
+	if in.StartAt != 0 { // Unix 0 = 1970.00
+		out.StartTime = time.Unix(in.StartAt, 0)
+	}
+
+	if in.EndAt != 0 { // Unix 0 = 1970.00
+		out.EndTime = time.Unix(in.EndAt, 0)
+	}
+	return out
+}
+
+func (in *TimeRange) ToProto() *pb.TimeRange {
+	out := &pb.TimeRange{}
+	if in == nil {
+		return out
+	}
+	out.StartAt = in.StartTime.Unix()
+	out.EndAt = in.EndTime.Unix()
+	return out
+}
+
+func (in *TimeRange) String() string {
+	return fmt.Sprintf("start:%s end:%s", in.StartTime, in.EndTime)
+}
+
+func (in *TimeRange) InRange(tar time.Time) bool {
+	bo1 := tar.After(in.StartTime) || tar.Equal(in.StartTime)
+	bo2 := tar.Before(in.EndTime) || tar.Equal(in.EndTime)
+	return bo1 && bo2
+}
+
+func (tr *TimeRange) XormSession(tx *xorm.Session, time string) *xorm.Session {
+	if tr == nil {
+		return tx
+	}
+	if !tr.StartTime.IsZero() {
+		tx = tx.And(time+" >= ?", tr.StartTime.Format(enum.FormatDayLayoutDetail))
+	}
+
+	if !tr.EndTime.IsZero() {
+		tx = tx.And(time+" <= ?", tr.EndTime.Format(enum.FormatDayLayoutDetail))
+	}
+
+	return tx
+}
+
+func (tr *TimeRange) AddDay(count int) {
+	ss := fmt.Sprintf("%dh", 24*count)
+	dur, _ := time.ParseDuration(ss)
+	tr.StartTime = tr.StartTime.Add(dur)
+	tr.EndTime = tr.EndTime.Add(dur)
+}
+
+// 获取复权后的净值曲线
+func genEquityCure(hes mod.AccHisEquitys, ts mod.Trades) *mod.ChartCurve {
+	sortHesTime := func(i, j int) bool { // 净值时间排序
+		return hes[i].Time.Before(hes[j].Time)
+	}
+	sort.Slice(hes, sortHesTime)
+	fundTrades := filterFundTrades(ts) //入金订单 排序
+
+	fes := GenFundEquityHisFromTradesAndEquityHis(hes, fundTrades)
+	equityCure := fes.ToCurve()
+
+	return equityCure
+}
+
+// 通过净值快照 + 出入金订单来生成基金净值法的净值曲线
+// 净值快照前后相同，忽略此点
+func GenFundEquityHisFromTradesAndEquityHis(hes mod.AccHisEquitys, ts mod.Trades) *femod.FundEquityHis {
+	// FeDebugMode = true // test code
+
+	record := femod.FundEquityHis{}
+	if len(hes) == 0 {
+		return &record
+	}
+
+	// 第一个点的处理
+	first := femod.InitFundEquity(hes[0].Equity)
+	newEP := femod.NewFundEquityPoint(hes[0].Time, *first)
+	record = append(record, newEP)
+	hes = hes[1:len(hes)]
+
+	FeDebug("第一个点：%+v\n", newEP)
+	// 剔除第一个点之前的无效订单
+	for {
+		if len(ts) == 0 {
+			break
+		}
+		if ts[0].CloseTime.After(record.Last().Time) {
+			break
+		}
+		FeDebug("发现无效订单：%+v\n", ts[0])
+		ts = ts[1:len(ts)]
+	}
+
+	tempEqu := -1.0 // 记录上一次的净值快照值，防止计算重复快照
+
+	// core
+	for _, he := range hes {
+		for {
+			//检查是否有出入金事件
+			if len(ts) == 0 {
+				break
+			}
+			if ts[0].CloseTime.After(he.Time) {
+				break
+			}
+			trade := ts[0]
+			// FeDebug("新的净值点之前需要加入订单 cmd %d profit %f time %s\n", trade.Cmd, trade.Profit, trade.CloseTime)
+			cur := record.Last().Deposit(trade.Profit)
+			newEP := femod.NewFundEquityPoint(*trade.CloseTime, *cur)
+			record = append(record, newEP)
+			ts = ts[1:len(ts)]
+			FeDebug("插入 - 出入金事件订单点：%v\n", record.Last())
+		}
+
+		if len(ts) == 0 || ts[0].CloseTime.After(he.Time) { //出入金订单排查完毕,可以处理净值快照点
+			if tempEqu == he.Equity {
+				FeDebug("过滤重复净值快照 Pass：%s %f\n", he.Time, he.Equity)
+				continue
+			}
+			tempEqu = he.Equity // update
+
+			lastP := record.Last()
+			lastcap := lastP.TotalCap()
+			if lastcap < 1 { // 默认此账户已经出金了，不再采信净值快照的变动
+				FeDebug("检查到账户已出金..过滤净值快照点..\n")
+				continue
+			}
+			rate := (he.Equity - lastcap) / lastcap
+			cur := lastP.Profit(rate)
+			newEP := femod.NewFundEquityPoint(he.Time, *cur)
+			record = append(record, newEP)
+			FeDebug("插入 - 净值事件订单点：%v\n", record.Last())
+		}
+	}
+	return &record
+}
+
+// 纯粹通过订单来生成净值曲线
+func GenS4EquityCurveFromTrades(ts mod.Trades, joinInfo *mod.AccountPreScore) *femod.FundEquityHis {
+	record := femod.FundEquityHis{}
+	if len(ts) == 0 {
+		return &record
+	}
+	ts = util.SortTradesByCloseTime(ts)
+
+	//第一个点,采用的报名时间
+	last := femod.InitFundEquity(joinInfo.JoinEquity)
+	newEP := femod.NewFundEquityPoint(joinInfo.JoinTime, *last)
+	record = append(record, newEP)
+
+	// 快照时间总是比订单是时间晚
+	ss := fmt.Sprintf("%ds", 1)
+	dur, _ := time.ParseDuration(ss)
+
+	for _, tt := range ts {
+		cur := &femod.FundEquity{}
+		if IsDepositOrder(tt.Cmd) {
+			cur = record.Last().Deposit(tt.Profit)
+		} else {
+			rate := getRateByTradeOpenCap(tt, record)
+			cur = record.Last().Profit(rate)
+		}
+		pointTime := tt.CloseTime.Add(dur)
+		// fmt.Printf("cmd %d profit %f time %s\n", tt.Cmd, tt.Profit, tt.CloseTime)
+		// fmt.Printf("last %v cur %v \n", last, cur)
+		newEP := femod.NewFundEquityPoint(pointTime, *cur)
+		record = append(record, newEP)
+	}
+	return &record
+}

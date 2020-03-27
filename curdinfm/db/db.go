@@ -64,17 +64,16 @@ func GetUser(tx *xorm.Session, in mod.MT4Account) (*mod.User, error) {
 	return out, err
 }
 
-// 查一个，借助查多个的函数
-func GetMgoAllAccInfo(tx *mgo.Database, in *mod.MT4Account) (*mod.MgoAllAccInfo, error) {
-	req := mod.MT4Accounts{in}
-	lis, err := GetMgoAllAccInfos(tx, req)
-	if err != nil {
-		return nil, err
+// 查询账户最新一条
+func GetSamApp(tx *xorm.Session, in mod.MT4Account) (*mod.App, error) {
+	out := &mod.App{}
+	tx = tx.Where("broker_id = ? and account = ?", in.BrokerID, in.Account)
+	tx = tx.Desc("ID").Limit(1)
+	exist, err := tx.Get(out)
+	if !exist {
+		return nil, fmt.Errorf("query brokerid %d accnout %s return null", in.BrokerID, in.Account)
 	}
-	if len(lis) != 1 {
-		return nil, fmt.Errorf("GetMgoAllAccInfo unexpected len %d", len(lis))
-	}
-	return lis[0], nil
+	return out, err
 }
 
 // 查：一组
