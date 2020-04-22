@@ -1,9 +1,4 @@
-package linkedlist
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
+package title
 
 /*
 	1 -> 2 -> 3 -> 4 -> nil
@@ -25,13 +20,13 @@ type ListNode struct {
 
 */
 
-func Reverse1(head *ListNode) *ListNode {
+func Reverse(head *ListNode) *ListNode {
 	var pre *ListNode // 重要，ListNode类型的nil
 	var cur = head
 	for cur != nil {
-		next := cur.Next //先保存
-		cur.Next = pre
-		pre, cur = cur, next
+		next := cur.Next     //1.保存后一个元素
+		cur.Next = pre       //2.后一个元素指向前一个元素
+		pre, cur = cur, next //3.向前一步
 	}
 	return pre
 }

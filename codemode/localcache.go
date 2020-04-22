@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"sync"
 	"time"
-
-	"gitlab.followme.com/CopyTradingGo/datastatistic-srv/src/datastatistic/util"
 )
 
 // 内部缓存系统 - 代替全局变量

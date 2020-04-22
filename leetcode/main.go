@@ -1,11 +1,23 @@
 package main
 
-import "fmt"
-
-import "time"
+import (
+	"fmt"
+	"sync"
+	"time"
+)
 
 func main() {
-	TestChan()
+	fmt.Println("123")
+	// TestChan()
+
+	out := testCache("in1")
+	fmt.Println(string(out))
+	out = testCache("in1")
+	fmt.Println(string(out))
+
+	out = testCache("in2")
+	fmt.Println(string(out))
+
 }
 
 func TestChan() {
@@ -35,4 +47,24 @@ func WriteChan(ch chan<- int) {
 	ch <- 2
 	close(ch)
 	fmt.Println("Do Close")
+}
+
+var cachemu sync.RWMutex
+var cache = map[string][]byte{}
+
+func testCache(in string) []byte {
+	cachemu.RLock()
+	va, ok := cache[in]
+	cachemu.RUnlock()
+	if ok {
+		return va
+	}
+	// refresh cache
+	newVa := []byte(in + "123")
+
+	cachemu.Lock()
+	cache[in] = newVa
+	cachemu.Unlock()
+
+	return newVa
 }

@@ -2,7 +2,6 @@ package tree
 
 import "fmt"
 
-//
 var initFlag bool
 
 func isValidBST2(root *TreeNode) bool {
@@ -49,16 +48,6 @@ func isValidBST(root *TreeNode) bool {
 	initFlag = true
 	return midloop(root)
 }
-	2
-1		3
-new in 2
-1
-stash out 2
-Get Right 3
-new in 3
-3
-new in 3
-3
 
 // 通过迭代来完成中序遍历
 func midloop(root *TreeNode) bool {
