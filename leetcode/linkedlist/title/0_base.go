@@ -27,13 +27,14 @@ func (in *ListNode) Print() {
 }
 
 func GenListNode(leng int) *ListNode {
-	pre := &ListNode{}
+	root := &ListNode{}
+	pre := root // 用于在循环中保持上一个节点
 	for i := 0; i < leng; i++ {
 		node := &ListNode{}
-		r := rand.Intn(100)
+		r := rand.Intn(9)
 		node.Val = r
 		pre.Next = node
 		pre = node
 	}
-	return pre.Next
+	return root.Next
 }
