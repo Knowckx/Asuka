@@ -1,27 +1,30 @@
 package title
 
-import "fmt"
-
 /*
 	判断括号是否成对
 	Input: "()[]{}"   	Output: true
 	Input: "(]"			Output: false
 
-	从左向右遍历，把字符压到栈里
 */
 
-func isValidPare(s string) bool {
+func IsValidPare(s string) bool {
+	stk := &Stack{}                                        // 使用栈来遍历字符
+	pareMap := map[rune]rune{'{': '}', '[': ']', '(': ')'} // 用map存放对应的字符配对
 	for _, c := range s {
-		fmt.Println(c)
-	}
-	return false
-}
+		if c == '{' || c == '[' || c == '(' {
+			stk.Push(c)
+			continue
+		}
+		// c是一个右侧括号
+		if stk.Count() == 0 {
+			return false
+		}
 
-// class Solution:
-//     def isValid(self, s: str) -> bool:
-//         dic = {'{': '}',  '[': ']', '(': ')', '?': '?'}
-//         stack = ['?']
-//         for c in s:
-//             if c in dic: stack.append(c)
-//             elif dic[stack.pop()] != c: return False
-//         return len(stack) == 1
+		peek := stk.Pop().(rune)
+		if pareMap[peek] == c {
+			continue
+		}
+		return false
+	}
+	return stk.Count() == 0
+}
