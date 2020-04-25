@@ -1,7 +1,7 @@
 package title
 
 /*
-	判断括号是否成对
+	判断括号是否成对  腾讯50
 	Input: "()[]{}"   	Output: true
 	Input: "(]"			Output: false
 
