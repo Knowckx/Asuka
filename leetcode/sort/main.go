@@ -3,7 +3,11 @@ package main
 import "fmt"
 
 func main() {
-	bubbleSort()
+	// bubbleSort()
+
+	// lis := []int{-1, 0, 3, 5, 9, 12}
+	lis1 := []int{2, 5}
+	BinSearch(lis1, 0)
 
 }
 
