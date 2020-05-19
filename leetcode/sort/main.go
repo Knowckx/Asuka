@@ -4,10 +4,11 @@ import "fmt"
 
 func main() {
 	// bubbleSort()
+	qSortBegin()
 
 	// lis := []int{-1, 0, 3, 5, 9, 12}
-	lis1 := []int{2, 5}
-	BinSearch(lis1, 0)
+	// lis1 := []int{2, 5}
+	// BinSearch(lis1, 0)
 
 }
 

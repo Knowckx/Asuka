@@ -1,4 +1,4 @@
-package topics
+package main
 
 import (
 	"fmt"
@@ -7,33 +7,29 @@ import (
 //快排
 func qSortBegin() {
 	arr := []int{40, 67, 89, 80, 21, 45, 37, 32, 59}
-	qSort(arr)
+	QSortByOneTurn(arr, 0, len(arr)-1)
 	fmt.Printf("最后结果：%v", arr)
 }
 
-//快排实现
-func qSort(arr []int) {
-	first := 0 //头尾标识
-	last := len(arr) - 1
-	key := 0
-	var tempArr []int //每次循环后的结果
-	for _, v := range arr {
-		if v >= arr[0] {
-			tempArr = append(tempArr, v)
+// 快排一次
+func QSortByOneTurn(ins []int, left int, right int) {
+	if left >= right {
+		return
+	}
+	cur := left // 对比坐标
+	std := ins[cur]
+
+	for i := left + 1; i <= right; i++ {
+		if ins[i] >= std {
 			continue
 		}
-		if v < arr[0] { //小值放左边
-			tempArr = append([]int{v}, tempArr...)
-			key++
-		}
+		temp := ins[i]
+		ins[i], ins[cur+1] = ins[cur+1], ins[cur]
+		ins[cur] = temp
+		cur++
+		// 这里 cur(基准) cur+1(基准+1)  i（发现一个比基础小的） 三个数 为了把i这个数放到基准的左侧
+		// cur的位置放i，cur自己向前挪动一步，原来cur+1位置的数反正一定比cur大，可以放到i的位置
 	}
-	copy(arr, tempArr) //一趟排序完成
-	fmt.Printf("一趟排序%v\n", arr)
-
-	if key-first > 1 {
-		qSort(arr[0:key])
-	}
-	if last-key > 1 {
-		qSort(arr[key+1 : last+1])
-	}
+	QSortByOneTurn(ins, left, cur-1)
+	QSortByOneTurn(ins, cur+1, right)
 }
