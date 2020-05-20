@@ -7,7 +7,10 @@ import (
 )
 
 func main() {
-	in := "-91283472332"
-	out := title.CusAtoi(in)
-	fmt.Println(out)
+	fmt.Println("Test")
+	strs := []string{"flower", "flow", "flight"}
+	// strs := []string{"c", "c"}
+
+	out := title.LongestCommonPrefix(strs)
+	fmt.Printf("answer:%s\n", out)
 }
