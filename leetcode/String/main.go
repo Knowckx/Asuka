@@ -8,9 +8,10 @@ import (
 
 func main() {
 	fmt.Println("Test")
-	strs := []string{"flower", "flow", "flight"}
+	// strs := []string{"flower", "flow", "flight"}
 	// strs := []string{"c", "c"}
 
-	out := title.LongestCommonPrefix(strs)
-	fmt.Printf("answer:%s\n", out)
+	str := "cbbd"
+	res := title.LongestPalindrome(str)
+	fmt.Printf("answer:%s\n", res)
 }
