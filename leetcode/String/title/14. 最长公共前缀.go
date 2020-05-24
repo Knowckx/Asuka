@@ -9,7 +9,6 @@ package title
 */
 
 // 解法 [列]扫描 比较每个字符串的相同列是否相同
-
 func LongestCommonPrefix(strs []string) string {
 	res := ""
 	if len(strs) == 0 {
