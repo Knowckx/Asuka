@@ -6,9 +6,6 @@ import (
 	"math/rand"
 )
 
-// 141 链表有环
-// 142 入环的节点
-
 type ListNode struct {
 	Val  int
 	Next *ListNode

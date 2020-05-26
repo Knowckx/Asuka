@@ -1,7 +1,7 @@
 package dp
 
 // 斐波那契数列 | 爬梯子
-// 非常标准的DP问题
+// 非常标准的DP问题 DP[100] = DP[99] + DP[98]
 
 // 除了最近的两次结果 其他的都不用保留
 func climbStairs(n int) int {
