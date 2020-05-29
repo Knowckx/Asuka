@@ -27,3 +27,20 @@ func merge2Slice(nums1 []int, m int, nums2 []int, n int) {
 		}
 	}
 }
+
+// 方法2，代码比较精巧
+func merge2Slice10(nums1 []int, m int, nums2 []int, n int) {
+	cur := m + n - 1
+	i1 := m - 1
+	i2 := n - 1
+	for cur != i1 { // 核心，当i2插完时，i2 = -1,此时cur = i1,后续就不用插入了
+		if i1 >= 0 && nums1[i1] > nums2[i2] {
+			nums1[cur] = nums1[i1]
+			i1--
+		} else {
+			nums1[cur] = nums2[i2] // num2插入
+			i2--                   // 不用管i2为负的情况，当i2为负时，循环跳出了
+		}
+		cur--
+	}
+}
