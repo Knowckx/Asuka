@@ -6,6 +6,8 @@ import (
 
 func main() {
 	fmt.Println("asuka hello world")
+
+	// merge2Slice
 	// test()
 
 }
