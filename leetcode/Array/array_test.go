@@ -11,3 +11,9 @@ func TestMerge2Slice(t *testing.T) {
 	fmt.Println("We Test")
 	merge2Slice(s1, 3, s2, 3)
 }
+
+func TestThreeSum(t *testing.T) {
+	s1 := []int{-1, 0, 1, 2, -1, -4}
+	res := threeSum(s1)
+	fmt.Println(res)
+}

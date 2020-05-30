@@ -4,7 +4,8 @@ package Array
 // 输入：[1,8,6,2,5,4,8,3,7]
 // 输出：49
 
-// 解法 双指针指向数组两端，两端的数哪个比较小，那就这指针向中间移动
+// 解法
+// 使用套路：双指针收束
 func maxArea(height []int) int {
 	le := 0
 	ri := len(height) - 1

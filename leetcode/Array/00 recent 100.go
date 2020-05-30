@@ -20,3 +20,19 @@ func (in *Queue) Pop() int {
 func (in *Queue) Size() int {
 	return len(*in)
 }
+
+// 有序数组的去重 | 一个刷题意外的成果
+func SetSlice(nums []int) []int {
+	fix := 0
+	for i := 0; i < len(nums); i++ {
+		if i > 0 && nums[i] == nums[i-1] {
+			fix++
+			continue
+		}
+		if fix > 0 {
+			nums[i-fix] = nums[i]
+		}
+	}
+	nums = nums[:len(nums)-fix]
+	return nums
+}
