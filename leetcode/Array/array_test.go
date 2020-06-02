@@ -17,3 +17,9 @@ func TestThreeSum(t *testing.T) {
 	res := threeSum(s1)
 	fmt.Println(res)
 }
+
+func Test_permute(t *testing.T) {
+	s1 := []int{1, 2, 3}
+	res := permute(s1)
+	fmt.Println(res)
+}

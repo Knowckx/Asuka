@@ -36,3 +36,11 @@ func SetSlice(nums []int) []int {
 	nums = nums[:len(nums)-fix]
 	return nums
 }
+
+// 最佳实践：切片中，移除某个下标的元素
+func IntsRemoveAt(ins []int, idx int) []int {
+	res := make([]int, 0, len(ins)-1)
+	res = append(res, ins[:idx]...)
+	res = append(res, ins[idx+1:]...)
+	return res
+}
