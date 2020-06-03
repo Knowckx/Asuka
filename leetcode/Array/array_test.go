@@ -23,3 +23,9 @@ func Test_permute(t *testing.T) {
 	res := permute(s1)
 	fmt.Println(res)
 }
+
+func Test_search33(t *testing.T) {
+	s1 := []int{3, 1}
+	res := search33(s1, 1)
+	fmt.Println(res)
+}
