@@ -6,9 +6,11 @@ import (
 )
 
 func TestMultiply(t *testing.T) {
-	s1 := "12"
-	s2 := "34"
-	Multiply3(s1, s2)
+
+	s1 := "2"
+	s2 := "3"
+	ss := Multiply3(s1, s2)
+	fmt.Println(ss)
 }
 
 func TestForCase1(t *testing.T) {
