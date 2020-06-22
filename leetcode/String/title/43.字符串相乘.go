@@ -51,9 +51,6 @@ func Multiply3(num1 string, num2 string) string {
 			res[i+k] = sum/10 + res[i+k] // 最左是高位
 		}
 	}
-	if res[0] == 0 {
-		res = res[1:len(res)]
-	}
 
 	ss := ""
 	for k, v := range res {
