@@ -29,3 +29,9 @@ func Test_search33(t *testing.T) {
 	res := search33(s1, 1)
 	fmt.Println(res)
 }
+
+func Test_Add3InPut(t *testing.T) {
+	s1 := []int{3, 1}
+	Add3InPut(s1, 1)
+	// fmt.Println(res)
+}
