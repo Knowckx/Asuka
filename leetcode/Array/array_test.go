@@ -31,7 +31,10 @@ func Test_search33(t *testing.T) {
 }
 
 func Test_Add3InPut(t *testing.T) {
-	s1 := []int{3, 1}
-	Add3InPut(s1, 1)
-	// fmt.Println(res)
+	nums := []int{1, 2, 5, 10, 11}
+	tar := 12
+
+	res := threeSumClosest(nums, tar)
+
+	fmt.Println(res)
 }

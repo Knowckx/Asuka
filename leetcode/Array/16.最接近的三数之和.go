@@ -1,45 +1,42 @@
 package Array
 
 import (
-	"fmt"
-	"math"
 	"sort"
 )
 
 // S=[-1, 2, 1, -4]and target =1.
 // 最接近 1 的三元组是 -1 + 2 + 1 = 2.
 
-func Add3InPut(ins []int, tar int) []int {
-	ins = []int{-1, 2, 1, -4}
-	tar = 1
-	sort.Ints(ins)
-
+// 1, 2, 5, 10, 11 | 12     预期 13
+func threeSumClosest(nums []int, target int) int {
+	sort.Ints(nums)
 	// init
-	res := ins[0:3]
-	gap := math.Abs(float64(res[0] + res[1] + res[2] - tar))
-	for le := 0; le < len(ins)-2; le++ {
-		ri := len(ins) - 1
+	res := nums[0] + nums[1] + nums[2]
+	for le := 0; le < len(nums)-2; le++ {
+		ri := len(nums) - 1
 		mid := le + 1
 		for mid < ri {
-			ngap := ins[le] + ins[ri] + ins[mid] - tar
-			if math.Abs(float64(ngap)) < gap {
-				res = []int{ins[le], ins[mid], ins[ri]}
-				mid++
-				continue
+			sum := nums[le] + nums[ri] + nums[mid]
+			if distance(sum, target) < distance(res, target) {
+				res = sum
 			}
-			if ngap > 0 {
+			if sum-target > 0 {
 				ri--
 			} else {
 				mid++
 			}
 		}
 	}
-
-	fmt.Println(res)
-	return ins
+	return res
 }
 
-// [-4 -1 1 2]
+// 要比math.Abs(float(res-target))快速
+func distance(a, b int) int {
+	if a > b {
+		return a - b
+	}
+	return b - a
+}
 
 /*
 	定义需要的东西  res = 目前提交的三个数  gap = 目前出现的最小差值
