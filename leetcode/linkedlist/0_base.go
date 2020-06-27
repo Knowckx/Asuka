@@ -1,4 +1,4 @@
-package title
+package linkedlist
 
 import (
 	"bytes"
@@ -12,6 +12,11 @@ type ListNode struct {
 }
 
 func (in *ListNode) Print() {
+	outs := in.String()
+	fmt.Println(outs)
+}
+
+func (in *ListNode) String() string {
 	outs := bytes.Buffer{}
 	if in != nil {
 		s := fmt.Sprintf("%d", in.Val)
@@ -23,7 +28,7 @@ func (in *ListNode) Print() {
 		outs.WriteString(s)
 		in = in.Next
 	}
-	fmt.Println(outs.String())
+	return outs.String()
 }
 
 func GenListNode(leng int) *ListNode {
