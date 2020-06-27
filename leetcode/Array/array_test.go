@@ -29,3 +29,12 @@ func Test_search33(t *testing.T) {
 	res := search33(s1, 1)
 	fmt.Println(res)
 }
+
+func Test_Add3InPut(t *testing.T) {
+	nums := []int{1, 2, 5, 10, 11}
+	tar := 12
+
+	res := threeSumClosest(nums, tar)
+
+	fmt.Println(res)
+}
