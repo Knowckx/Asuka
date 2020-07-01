@@ -1,4 +1,4 @@
-package title
+package linkedlist
 
 /*
 	1.快慢指针向前走，只要是环，两个指针必然在环内相遇

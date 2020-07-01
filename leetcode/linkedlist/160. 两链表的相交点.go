@@ -1,4 +1,4 @@
-package title
+package linkedlist
 
 // 普通解 Map存放节点指针
 func getIntersectionNode(headA, headB *ListNode) *ListNode {

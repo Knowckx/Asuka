@@ -1,4 +1,4 @@
-package title
+package linkedlist
 
 /*
 	20.04.17 思科电话面试 两个链表求和
@@ -10,7 +10,6 @@ package title
 	思路：
 	求和运算是从最后一位的数字开始加，因此我们需要先反转一下单链表，然后再想加
 */
-
 
 func AddTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	l1cur := Reverse(l1) // 先反转
