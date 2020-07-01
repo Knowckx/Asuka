@@ -38,3 +38,12 @@ func Test_Add3InPut(t *testing.T) {
 
 	fmt.Println(res)
 }
+
+func Test_findKthLargest(t *testing.T) {
+	nums := []int{1, 2, 5, 10, 11}
+	tar := 1
+
+	res := findKthLargest(nums, tar)
+
+	fmt.Println(res)
+}
