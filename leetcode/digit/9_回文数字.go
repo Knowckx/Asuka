@@ -1,4 +1,4 @@
-package title
+package digit
 
 /*
 	判断一个数字是不是回文的（对称）

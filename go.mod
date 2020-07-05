@@ -12,8 +12,8 @@ require (
 	github.com/clbanning/mxj v1.8.4 // indirect
 	github.com/go-sql-driver/mysql v1.5.0 // indirect
 	github.com/golang/protobuf v1.4.0
-	github.com/lxn/walk v0.0.0-20191128110447-55ccb3a9f5c1
-	github.com/lxn/win v0.0.0-20191128105842-2da648fda5b4
+	github.com/lxn/walk v0.0.0-20191128110447-55ccb3a9f5c1 // indirect
+	github.com/lxn/win v0.0.0-20191128105842-2da648fda5b4 // indirect
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
 	github.com/micro/go-micro v1.18.0
 	github.com/syndtr/goleveldb v1.0.0 // indirect
