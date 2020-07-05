@@ -1,5 +1,7 @@
 package title
 
+import "github.com/Knowckx/Asuka/leetcode/base"
+
 /*
 	判断括号是否成对  腾讯50
 	Input: "()[]{}"   	Output: true
@@ -8,7 +10,7 @@ package title
 */
 
 func IsValidPare(s string) bool {
-	stk := &Stack{}                                        // 使用栈来遍历字符
+	stk := &base.Stack{}                                   // 使用栈来遍历字符
 	pareMap := map[rune]rune{'{': '}', '[': ']', '(': ')'} // 用map存放对应的字符配对
 	for _, c := range s {
 		if c == '{' || c == '[' || c == '(' {

@@ -13,7 +13,7 @@ type MinStack struct{
 
 
 /** initialize your data structure here. */
-func Constructor() MinStack {
+func Constructor() MinStack       {
 	out := MinStack{}
 	out.Datas = make([]int,0,8)
 	out.Mins = make([]int,0,8)
