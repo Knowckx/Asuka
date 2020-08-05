@@ -17,3 +17,10 @@ func Test_heapsort(t *testing.T) {
 	fmt.Println(he)
 
 }
+
+func Test_GenMineMap(t *testing.T) {
+
+	// GenMineMap(10, 5, 10)
+	GenRandomNums(100, 5)
+
+}
