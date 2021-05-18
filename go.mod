@@ -17,7 +17,8 @@ require (
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
 	github.com/micro/go-micro v1.18.0
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/rs/zerolog v1.21.0 // indirect
+	github.com/rs/zerolog v1.22.0 // indirect
+	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/syndtr/goleveldb v1.0.0 // indirect
 	github.com/tealeg/xlsx v1.0.5 // indirect
 	github.com/xormplus/builder v0.0.0-20200331055651-240ff40009be // indirect
