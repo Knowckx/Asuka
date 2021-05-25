@@ -32,12 +32,17 @@ func Test_CurPath(t *testing.T) {
 
 // 获得项目根路径
 func Test_CurProjPath(t *testing.T) {
+	root := GetProjRootPath()
+	println("root path:", root)
+}
+
+func GetProjRootPath() string {
 	curPath, err := os.Getwd()
 	if err != nil {
 		panic(err)
 	}
 	projName := `Asuka`
 	paths := strings.Split(curPath, projName)
-	execPath := filepath.Join(paths[0], projName)
-	println(execPath)
+	rootPath := filepath.Join(paths[0], projName)
+	return rootPath
 }

@@ -86,10 +86,11 @@ message ID {
 }
 
 message PageOp {
-    string  OrderBy     = 1; //排序字段名称
-    bool    IsDESC      = 2; //true:从大到小排列   false:从小到大排列
-    int32   PageIndex   = 3; //页面序号，从0开始
-    int32   PageSize    = 4; //每页的数量
+    int32   PageIndex   = 1; //页面序号，从0开始
+    int32   PageSize    = 2; //每页的数量
+    string  OrderBy     = 3; //排序字段名称
+    bool    IsDESC      = 4; //true:从大到小排列   false:从小到大排列
+
 }
 
 message MT4Account {
