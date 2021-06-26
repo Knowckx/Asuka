@@ -52,3 +52,7 @@ func Test_PrintlnBool(t *testing.T) {
 	var v1 bool
 	fmt.Println(v1)
 }
+
+func Test_StartTest(t *testing.T) {
+	StartTest()
+}
