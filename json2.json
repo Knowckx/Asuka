@@ -1,22 +1,37 @@
-
-
-
-CREATE TABLE IF NOT EXISTS `t_customrank_config` (
-		`ID` INT NOT NULL auto_increment PRIMARY KEY COMMENT '主键ID',
-		`PipelineName` VARCHAR ( 64 ) NOT NULL COMMENT '排行榜名称',
-		`Text` text COMMENT '描述',
-		`UserLimit` TINYINT NOT NULL COMMENT '每个用户参赛次数',
-		`ManualCfg` INT NULL COMMENT '外键 手动上榜配置',
-		`CondCfg` INT NULL COMMENT '外键 条件上榜配置',
-		`HideConfig` INT NOT NULL COMMENT '字段隐藏配置',
-		`MaxRetracementMax` FLOAT NULL COMMENT '回撤最大值',
-		`EquityMin` DOUBLE NULL COMMENT '净值最小值',
-		`StartAt` TIMESTAMP NOT NULL COMMENT '比赛开始时间',
-		`EndAt` TIMESTAMP NOT NULL COMMENT '比赛结束时间',
-		`CreateTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-		`UpdateTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-		UNIQUE `idx_unique_index` ( `RankIndex` ),
-		UNIQUE `idx_unique_MT4Account` ( `BrokerID`,`Account` ),
-		INDEX `idx_time_search` ( `createtime` )  -- 括号前不要有逗号
-) CHARACTER SET = utf8mb4 COMMENT = '细分排行榜配置';
-
+{
+    "type": "ActualCost",
+    "dataSet": {
+        "granularity": "None",
+        "aggregation": {
+            "totalCost": {
+                "name": "Cost",
+                "function": "Sum"
+            },
+            "totalCostUSD": {
+                "name": "CostUSD",
+                "function": "Sum"
+            }
+        },
+        "sorting": [
+            {
+                "direction": "descending",
+                "name": "Cost"
+            }
+        ],
+        "grouping": [
+            {
+                "type": "Dimension",
+                "name": "ResourceGroupName"
+            },
+            {
+                "type": "Dimension",
+                "name": "SubscriptionId"
+            }
+        ]
+    },
+    "timeframe": "Custom",
+    "timePeriod": {
+        "from": "2021-06-01T00:00:00.000Z",
+        "to": "2021-06-30T23:59:59.000Z"
+    }
+}

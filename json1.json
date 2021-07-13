@@ -1,364 +1,203 @@
 {
-    "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
-    "actions": [
-        {
-            "_class": "hudson.model.CauseAction",
-            "causes": [
-                {
-                    "_class": "org.jenkinsci.plugins.ghprb.GhprbCause",
-                    "shortDescription": "GitHub pull request #112 of commit 254366d66a8faab4c9ce9578cd077043bad015c6, no merge conflicts."
-                }
-            ]
-        },
-        {
-            "_class": "org.jenkinsci.plugins.ghprb.GhprbParametersAction",
-            "parameters": [
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbActualCommit",
-                    "value": ""
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbAuthorRepoGitUrl",
-                    "value": "https://github.wdf.sap.corp/EurekaUat/claims-settlement.git"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbPullId",
-                    "value": "not a pull"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbTargetBranch",
-                    "value": "develop"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbSourceBranch",
-                    "value": "develop"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbPullAuthorLogin",
-                    "value": ""
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbGhRepository",
-                    "value": "EurekaUat/claims-settlement"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "GIT_TAG",
-                    "value": ""
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "sha1",
-                    "value": "origin/pr/112/merge"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbActualCommit",
-                    "value": "254366d66a8faab4c9ce9578cd077043bad015c6"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbActualCommitAuthor",
-                    "value": "eureka-pipeline-robot"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbActualCommitAuthorEmail",
-                    "value": "eureka-cd@sap.com"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbAuthorRepoGitUrl",
-                    "value": "https://github.wdf.sap.corp/EurekaUat/claims-settlement.git"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbTriggerAuthor",
-                    "value": ""
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbTriggerAuthorEmail",
-                    "value": ""
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbTriggerAuthorLogin",
-                    "value": ""
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbTriggerAuthorLoginMention",
-                    "value": ""
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbPullId",
-                    "value": "112"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbTargetBranch",
-                    "value": "develop"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbSourceBranch",
-                    "value": "test"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "GIT_BRANCH",
-                    "value": "test"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbPullAuthorEmail",
-                    "value": "eureka-cd@sap.com"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbPullAuthorLogin",
-                    "value": "eureka-cd"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbPullAuthorLoginMention",
-                    "value": "@eureka-cd"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbPullDescription",
-                    "value": "GitHub pull request #112 of commit 254366d66a8faab4c9ce9578cd077043bad015c6, no merge conflicts."
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbPullTitle",
-                    "value": "test"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbPullLink",
-                    "value": "https://github.wdf.sap.corp/EurekaUat/claims-settlement/pull/112"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbPullLongDescription",
-                    "value": "null"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbCommentBody",
-                    "value": "null"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbGhRepository",
-                    "value": "EurekaUat/claims-settlement"
-                },
-                {
-                    "_class": "hudson.model.StringParameterValue",
-                    "name": "ghprbCredentialsId",
-                    "value": "github.wdf.sap.corp"
-                }
-            ]
-        },
-        {
-            "_class": "jenkins.metrics.impl.TimeInQueueAction",
-            "blockedDurationMillis": 0,
-            "blockedTimeMillis": 0,
-            "buildableDurationMillis": 0,
-            "buildableTimeMillis": 2,
-            "buildingDurationMillis": 963529,
-            "executingTimeMillis": 962590,
-            "executorUtilization": 1.0,
-            "subTaskCount": 1,
-            "waitingDurationMillis": 8621,
-            "waitingTimeMillis": 8621
-        },
-        {},
-        {
-            "_class": "org.jenkinsci.plugins.workflow.cps.EnvActionImpl"
-        },
-        {
-            "_class": "hudson.plugins.git.util.BuildData",
-            "buildsByBranchName": {
-                "origin/test": {
-                    "_class": "hudson.plugins.git.util.Build",
-                    "buildNumber": 232,
-                    "buildResult": null,
-                    "marked": {
-                        "SHA1": "254366d66a8faab4c9ce9578cd077043bad015c6",
-                        "branch": [
-                            {
-                                "SHA1": "254366d66a8faab4c9ce9578cd077043bad015c6",
-                                "name": "origin/test"
-                            }
-                        ]
-                    },
-                    "revision": {
-                        "SHA1": "254366d66a8faab4c9ce9578cd077043bad015c6",
-                        "branch": [
-                            {
-                                "SHA1": "254366d66a8faab4c9ce9578cd077043bad015c6",
-                                "name": "origin/test"
-                            }
-                        ]
-                    }
-                },
-                "origin/TEST_FAIL": {
-                    "_class": "hudson.plugins.git.util.Build",
-                    "buildNumber": 56,
-                    "buildResult": null,
-                    "marked": {
-                        "SHA1": "e3262f42848440b0e9dde0f8d846404daf873df8",
-                        "branch": [
-                            {
-                                "SHA1": "e3262f42848440b0e9dde0f8d846404daf873df8",
-                                "name": "origin/TEST_FAIL"
-                            }
-                        ]
-                    },
-                    "revision": {
-                        "SHA1": "e3262f42848440b0e9dde0f8d846404daf873df8",
-                        "branch": [
-                            {
-                                "SHA1": "e3262f42848440b0e9dde0f8d846404daf873df8",
-                                "name": "origin/TEST_FAIL"
-                            }
-                        ]
-                    }
-                },
-                "origin/develop": {
-                    "_class": "hudson.plugins.git.util.Build",
-                    "buildNumber": 231,
-                    "buildResult": null,
-                    "marked": {
-                        "SHA1": "6094d8b8dee7da268ec39e9adae8d8fb8531b8ad",
-                        "branch": [
-                            {
-                                "SHA1": "6094d8b8dee7da268ec39e9adae8d8fb8531b8ad",
-                                "name": "origin/develop"
-                            }
-                        ]
-                    },
-                    "revision": {
-                        "SHA1": "6094d8b8dee7da268ec39e9adae8d8fb8531b8ad",
-                        "branch": [
-                            {
-                                "SHA1": "6094d8b8dee7da268ec39e9adae8d8fb8531b8ad",
-                                "name": "origin/develop"
-                            }
-                        ]
-                    }
-                }
+    "properties": {
+        "columns": [
+            {
+                "name": "PreTaxCost",
+                "type": "Number"
             },
-            "lastBuiltRevision": {
-                "SHA1": "254366d66a8faab4c9ce9578cd077043bad015c6",
-                "branch": [
-                    {
-                        "SHA1": "254366d66a8faab4c9ce9578cd077043bad015c6",
-                        "name": "origin/test"
-                    }
-                ]
+            {
+                "name": "UsageDate",
+                "type": "Number"
             },
-            "remoteUrls": [
-                "git@github.wdf.sap.corp:EurekaUat/claims-settlement.git"
+            {
+                "name": "ResourceGroupName",
+                "type": "String"
+            },
+            {
+                "name": "SubscriptionId",
+                "type": "String"
+            },
+            {
+                "name": "Currency",
+                "type": "String"
+            }
+        ],
+        "rows": [
+            [
+                0.01260337300997,
+                20210531,
+                "cloud-shell-storage-westeurope",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
             ],
-            "scmName": ""
-        },
-        {
-            "_class": "hudson.plugins.git.GitTagAction"
-        },
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {
-            "_class": "org.jenkinsci.plugins.pipeline.modeldefinition.actions.RestartDeclarativePipelineAction"
-        },
-        {},
-        {
-            "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
-        },
-        {},
-        {},
-        {},
-        {}
-    ],
-    "artifacts": [],
-    "building": false,
-
-    
-    // "displayName": "#232", // 
-    // "fullDisplayName": "eurekauat-claims-settlement-2e39a253 #232",
-    // "duration": 963529,
-    "id": "232",
-    "result": "SUCCESS",
-    "timestamp": 1622512831343,
-    "url": "https://jenkins.eurekacloud.io/job/eurekauat-claims-settlement-2e39a253/232/",
-    "description": "<a title=\"test\" href=\"https://github.wdf.sap.corp/EurekaUat/claims-settlement/pull/112\">PR #112</a>: test",
-
-
-    "estimatedDuration": 850607,
-    "executor": null,
-    "keepLog": false,
-    "number": 232,
-    "queueId": 95493,
-    "changeSets": [
-        {
-            "_class": "hudson.plugins.git.GitChangeSetList",
-            "items": [
-                {
-                    "_class": "hudson.plugins.git.GitChangeSet",
-                    "affectedPaths": [
-                        "041236322"
-                    ],
-                    "commitId": "254366d66a8faab4c9ce9578cd077043bad015c6",
-                    "timestamp": 1622512810000,
-                    "author": {
-                        "absoluteUrl": "https://jenkins.eurekacloud.io/user/eureka-cd",
-                        "fullName": "eureka-pipeline-robot"
-                    },
-                    "authorEmail": "eureka-cd@sap.com",
-                    "comment": "test\n",
-                    "date": "2021-06-01 02:00:10 +0000",
-                    "id": "254366d66a8faab4c9ce9578cd077043bad015c6",
-                    "msg": "test",
-                    "paths": [
-                        {
-                            "editType": "add",
-                            "file": "041236322"
-                        }
-                    ]
-                }
+            [
+                0.019262314739086,
+                20210531,
+                "cloud-shell-storage-southeastasia",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
             ],
-            "kind": "git"
-        }
-    ],
-    "culprits": [
-        {
-            "absoluteUrl": "https://jenkins.eurekacloud.io/user/eureka-cd",
-            "fullName": "eureka-pipeline-robot"
-        }
-    ],
-    "nextBuild": {
-        "number": 233,
-        "url": "https://jenkins.eurekacloud.io/job/eurekauat-claims-settlement-2e39a253/233/"
-    },
-    "previousBuild": {
-        "number": 231,
-        "url": "https://jenkins.eurekacloud.io/job/eurekauat-claims-settlement-2e39a253/231/"
+            [
+                0.031610363073545,
+                20210531,
+                "return-simulator_group",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                0.033008637453082,
+                20210531,
+                "shoot--eureka--tony-test",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                0.042158216104881,
+                20210531,
+                "shoot--eureka--iac-tony",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                0.169899568711188,
+                20210531,
+                "benchmark_group",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                0.53759992096818,
+                20210531,
+                "shoot--eureka--black-bear",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                1.747125245757169,
+                20210531,
+                "shoot--cic-sre--sretools",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                3.194879939220827,
+                20210531,
+                "retuncosmos",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                4.326673627257029,
+                20210531,
+                "hub-spoke-prod",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                5.890559480776679,
+                20210531,
+                "benchmark-for-hdl",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                10.672840731727836,
+                20210531,
+                "networkwatcherrg",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                19.010483795504562,
+                20210531,
+                "shoot--eureka--k8scornerstone2",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                39.6,
+                20210531,
+                "microsoft.saas",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                43.32582195312823,
+                20210531,
+                "shoot--eureka--cic-montreal",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                43.82631076727031,
+                20210531,
+                "shoot--rm--rm-dev",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                47.39742319598287,
+                20210531,
+                "shoot--eureka--rgo-dev",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                51.60605428398417,
+                20210531,
+                "shoot--cnstone--k8s-rm",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                56.77413005314904,
+                20210531,
+                "shoot--ede--attachment",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                57.331459973212006,
+                20210531,
+                "shoot--eureka--polar",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                63.764495369229174,
+                20210531,
+                "infra",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                63.995058065381706,
+                20210531,
+                "shoot--eureka--osta-dev",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                65.90582387652978,
+                20210531,
+                "shoot--eureka--cic-german",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                96.22383920144723,
+                20210531,
+                "shoot--eureka-iac--spark",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ],
+            [
+                99.82733152133271,
+                20210531,
+                "shoot--eureka--k8scornerstone1",
+                "9d864643-1d6b-4ce5-93f8-60eb1e6a2172",
+                "USD"
+            ]
+        ]
     }
 }
