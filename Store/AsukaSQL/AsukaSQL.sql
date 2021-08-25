@@ -43,5 +43,3 @@ Update t_customrank_config set RankText = ""  where RankIndex = 3;
 Insert into tableA { (field1,field2…)}  values (value1 , value2…)
 	value1 可以为 null ,让DB自己去修正为默认值
 
---pg 加字段
-ALTER TABLE tableA ADD COLUMN "asuCol" text NOT NULL DEFAULT '';

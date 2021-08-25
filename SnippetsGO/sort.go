@@ -1,33 +1,17 @@
 package SnippetsGO
 
 import (
-	"fmt"
 	"sort"
 )
 
-type person struct {
-	ID   int
-	name string
-}
+// 这个类型需要实现sort接口的Len，Less和Swap方法 | 这是官方包的例子
+type StringSlice []string
 
-type Users []*person
-
-// 这个类型需要实现sort接口的Len，Less和Swap方法
-func (s Users) Len() int {
-	return len(s)
-}
-func (s Users) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-func (s Users) Less(i, j int) bool {
-	return s[i].ID > s[j].ID
-}
+func (x StringSlice) Len() int           { return len(x) }
+func (x StringSlice) Less(i, j int) bool { return x[i] < x[j] }
+func (x StringSlice) Swap(i, j int)      { x[i], x[j] = x[j], x[i] }
 
 func TestSort() {
-	P1 := &person{ID: 1, name: "A1"}
-	P2 := &person{ID: 2, name: "B2"}
-
-	people := []*person{P1, P2}
-	sort.Sort(Users(people))
-	fmt.Println(people[0], people[1])
+	ins := StringSlice([]string{"3", "2", "1"})
+	sort.Sort(ins)
 }
