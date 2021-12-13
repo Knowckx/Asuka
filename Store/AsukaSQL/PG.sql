@@ -22,8 +22,6 @@ CREATE INDEX "idx_date" ON "azure_cost_report" USING btree (  -- 加索引模板
 
 
 
---pg 字段 加
-ALTER TABLE tableA ADD  "AsuCol" varchar NOT NULL DEFAULT '';
 
 --删
 ALTER TABLE azure_cost_report DROP COLUMN "Subscription"

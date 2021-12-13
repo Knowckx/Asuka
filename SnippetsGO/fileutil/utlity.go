@@ -22,19 +22,3 @@ func WaitForServer(url string) error {
 	return fmt.Errorf("server %s failed to respond after %s", url, timeout) //最后也没成功。
 
 }
-
-//功能，记录执行时间1
-func bigSlowOperation() {
-	defer trace("bigSlowOperation")() // --事实上这一条语句可以控制函数所有的入口和出口  牛！
-	// ...睡5秒，模拟大操作。
-	time.Sleep(5 * time.Second)
-}
-
-//2
-func trace(msg string) func() { //返回一个无参无返回值的内函数
-	start := time.Now()
-	log.Printf("enter %s", msg) //执行到了，记录时间
-	return func() {
-		log.Printf("exit %s (%s)", msg, time.Since(start)) //最后退出了，记录时间
-	}
-}
