@@ -20,6 +20,10 @@ CREATE INDEX "idx_date" ON "azure_cost_report" USING btree (  -- 加索引模板
   "date"  ASC NULLS LAST
 );
 
+CREATE UNIQUE INDEX "idx_date" ON "azure_cost_report" USING btree (  -- 加唯一索引
+  "date"  ASC NULLS LAST
+);
+
 
 
 
