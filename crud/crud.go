@@ -86,3 +86,21 @@ func ClientSecretCreateOrUpdate(ins []*AzureClientSecret) {
 	}
 	Inserts(insertsLis) // Insert
 }
+
+// get 自定义select
+type ResGroupNameCost struct {
+	ResGroupName string
+	Cost         float64
+}
+
+func (t *ResGroupNameCost) TableName() string {
+	return "azure_cost_report"
+}
+
+func GetDailyResGroupCost(in *AzureClientSecret) []*ResGroupNameCost {
+	dayData := []*ResGroupNameCost{}
+	tx := defaultDB.Where("date_type = ?", in.ClientID)
+	tx.Group("res_group_name").Select("res_group_name, sum(cost)::NUMERIC as cost") // PG money type shoube convert to NUMERIC
+	tx.Find(&dayData)
+	return dayData
+}
