@@ -13,7 +13,7 @@ import (
 	CRUD = create, read, update and delete.
 */
 
-// read - one line
+// Get - one line
 func GetSecretsHash() (string, error) {
 	sec := &AzureClientSecret{}
 	res := defaultDB.Where("name = ?", "123").First(sec)
@@ -81,7 +81,6 @@ func ClientSecretCreateOrUpdate(ins []*AzureClientSecret) {
 		upAff := defaultDB.Model(&AzureClientSecret{}).Where("subscription_name = ?", in.SubscriptionName).Updates(in).RowsAffected
 		if upAff == 0 {
 			insertsLis = append(insertsLis, in)
-
 		}
 	}
 	Inserts(insertsLis) // Insert

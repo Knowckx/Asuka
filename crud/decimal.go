@@ -1,4 +1,4 @@
-package pkg
+package crud
 
 import (
 	"fmt"
@@ -8,41 +8,17 @@ import (
 	"strings"
 )
 
-// 结构体配置转二进制数
-type Cfg struct {
-	Score bool //1
-	ROI   bool //2
-	MR    bool //3
+// a lot of bool fields
+type BoolConfig struct {
+	IsAddName    bool //1
+	IsAddAddress bool //2
+	IsAddEamil   bool //3
+	IsAddAge     bool //4
+	IsAddPwd     bool //5
 }
 
-func Test() {
-	// var int2 = 5
-
-	fmt.Println("Start")
-	cf := new(Cfg)
-	cf.MR = false
-	cf.ROI = true
-	// fmt.Println(cf.ToBin())
-	v := reflect.ValueOf(cf).Elem()
-	fmt.Println(v.Kind())
-	_ = v.NumField() - 5
-	return
-
-	// // 位数不足，左补0
-	// func (c *RankFiledHideConfig) FromDec(dec int) error {
-	// 	ss := DecBin(dec)
-	// 	leng := len(ss)
-	// 	v := reflect.ValueOf(c).Elem()
-
-	err := cf.FromBin("110")
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Printf("%v", cf)
-
-}
-
-func (c *Cfg) ToBin() string {
+// ToBin return binary like "01000"
+func (c *BoolConfig) ToBin() string {
 	v := reflect.ValueOf(*c)
 	rst := ""
 	switch v.Kind() {
@@ -59,7 +35,7 @@ func (c *Cfg) ToBin() string {
 	return rst
 }
 
-func (c *Cfg) FromBin(ins string) error {
+func (c *BoolConfig) FromBin(ins string) error {
 	leng := len(ins)
 
 	v := reflect.ValueOf(c).Elem()
@@ -97,7 +73,7 @@ func BinDec(b string) (int, error) {
 	for i := 0; i < l; i++ {
 		f, err := strconv.ParseFloat(ss[i], 10)
 		if err != nil {
-			return -1, fmt.Errorf("Binary to decimal error:", err.Error())
+			return -1, err
 		}
 		d += f * math.Pow(2, float64(l-i-1))
 	}

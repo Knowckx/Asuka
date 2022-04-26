@@ -1,0 +1,25 @@
+
+FROM chromedp/headless-shell:latest
+
+WORKDIR /usr/share/fonts
+
+# install 文泉驿微米黑 font
+RUN  apt-get update \
+        && apt-get install -y ttf-wqy-microhei \
+        && fc-cache \
+        && fc-list
+
+# ENTRYPOINT [ "/headless-shell/headless-shell", "--no-sandbox", "--headless", "--disable-gpu", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222","https://www.baidu.com/" ]
+
+
+ENTRYPOINT [ "/headless-shell/headless-shell", "--no-sandbox", "--headless", "--disable-gpu", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222","--proxy-server=http://proxy.pvgl.sap.corp:8080","https://www.facebook.com/" ]
+
+
+
+# add CA
+# RUN apt-get update \
+#  && apt-get install -y --no-install-recommends ca-certificates
+
+# wipe entrance point
+# RUN apt-get update; apt install dumb-init -y
+# ENTRYPOINT ["dumb-init", "--"]
