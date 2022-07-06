@@ -12,7 +12,8 @@ require (
 	github.com/bndr/gotabulate v1.1.2 // indirect
 	github.com/clbanning/mxj v1.8.4 // indirect
 	github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8
-	github.com/golang/protobuf v1.4.0
+	github.com/go-pg/pg/v10 v10.10.6 // indirect
+	github.com/golang/protobuf v1.4.3
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
 	github.com/micro/go-micro v1.18.0
 	github.com/pkg/errors v0.9.1
