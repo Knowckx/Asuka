@@ -1,12 +1,17 @@
 package SnippetsGO
 
 import (
+	"sync"
+
 	"github.com/rs/zerolog/log"
 )
 
 /* 工作中经常有这样的需求，需要一个全局变量 或者 单例，用这个变量来记一些状态数据 */
 
-var fInstance *NotifyFilter // 用一个map来记录这个元素是不是已经出现过了
+var (
+	fInstance     *NotifyFilter // 用一个map来记录这个元素是不是已经出现过了
+	fInstanceOnce sync.Once
+)
 
 // 入口
 func NotifyFilterEntrence(accessId string) error {
@@ -43,9 +48,13 @@ func NewNotifyFilter() *NotifyFilter {
 	return &out
 }
 
+func ResetfInstance() {
+	fInstance = NewNotifyFilter()
+}
+
 func FilterAccessId(accessId string) bool {
 	if fInstance == nil {
-		fInstance = NewNotifyFilter()
+		fInstanceOnce.Do(ResetfInstance)
 	}
 	return fInstance.IsRepeated(accessId)
 }
