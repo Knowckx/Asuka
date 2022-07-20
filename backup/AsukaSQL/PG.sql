@@ -7,10 +7,10 @@ CREATE TABLE IF NOT EXISTS "azure_cost_report" (
   "project" varchar,
   "subscription" varchar,
   "res_group_name" varchar,
-  "res_type" varchar,
+  "dajosn" JSONB,
   "qty" int4,
   "cost" money,
-	"created_at" timestamptz,
+  "created_at" timestamptz,
   "updated_at" timestamptz,
   "deleted_at" timestamptz
 );

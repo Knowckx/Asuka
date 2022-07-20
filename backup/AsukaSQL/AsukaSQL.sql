@@ -39,7 +39,13 @@ Alter Table T_table ADD `FilterGradeScore` TEXT  not null COMMENT '等级评分�
 -- 改数据
 Update t_customrank_config set RankText = ""  where RankIndex = 3;
 
-加默认数据 
-Insert into tableA { (field1,field2…)}  values (value1 , value2…)
-	value1 可以为 null ,让DB自己去修正为默认值
+
+-- 加数据
+加数据，不指定字段，每一个字段都要填入 | ID字段容易冲突
+INSERT INTO TABLE_NAME VALUES (value1,value2,...valueN);
+
+
+加数据，指定几个字段，其他字段默认值 | 推荐
+INSERT INTO tableA (field1,field2…)  VALUES ('{}', 'vs');
+
 
