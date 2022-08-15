@@ -12,14 +12,14 @@ import (
 // insert
 func Test_ClientSecretInsertTo(t *testing.T) {
 	// InitPGForTest()
-	ins := []*AzureClientSecret{}
-	data := NewAzureClientSecretTese()
+	ins := []*AzureClient{}
+	data := NewAzureClientTese()
 	ins = append(ins, data)
 	Inserts(ins)
 }
 
-func NewAzureClientSecretTese() *AzureClientSecret {
-	out := &AzureClientSecret{}
+func NewAzureClientTese() *AzureClient {
+	out := &AzureClient{}
 	out.ClientID = "c79c6b22-7efb-4e09-a012-32f372613ef9"
 	out.ClientSecret = "test"
 	out.SubscriptionID = "9d864643-1d6b-4ce5-93f8-60eb1e6a2172"

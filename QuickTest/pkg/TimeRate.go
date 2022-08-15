@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/micro/go-micro/util/log"
 	"golang.org/x/time/rate"
 )
 
@@ -19,10 +18,12 @@ func StartTest() {
 		time.Sleep(1 * time.Second)
 	}
 }
+
 func Consumer() {
 	ok := GlbLit.Allow()
 	if !ok {
-		log.Info("No Token.returned.")
+
+		log.Info().Msg("No Token.returned.")
 		return
 	}
 	fmt.Println("Consumer Start")

@@ -6,8 +6,6 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
-
-	"github.com/micro/go-micro/util/log"
 )
 
 // 模拟外部程序调用接口
@@ -21,11 +19,11 @@ func StartTest() {
 func Consumer() {
 	ok := GlbMgr.AddOne()
 	if !ok {
-		log.Info("No Token.returned.")
+		log.Info().Msg("No Token.returned.")
 		return
 	}
 	defer GlbMgr.Done()
-	log.Info("Get Token.go.")
+	log.Info().Msg("Get Token.go.")
 	time.Sleep(3 * time.Second)
 	fmt.Println("Consumer End")
 }

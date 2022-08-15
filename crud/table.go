@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type AzureClientSecret struct {
+type AzureClient struct {
 	gorm.Model
 	SubscriptionName string
 	SubscriptionID   string
@@ -18,6 +18,6 @@ type AzureClientSecret struct {
 	DeletedAt        time.Time
 }
 
-func (t *AzureClientSecret) TableName() string {
+func (t *AzureClient) TableName() string {
 	return "azure_client_secret"
 }

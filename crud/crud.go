@@ -3,9 +3,9 @@ package crud
 import (
 	"fmt"
 
+	infa "github.com/Knowckx/ainfa"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog/log"
-	infa "github.tools.sap/aeolia/in-fa"
 )
 
 /*
@@ -15,7 +15,7 @@ import (
 
 // Get - one line
 func GetSecretsHash() (string, error) {
-	sec := &AzureClientSecret{}
+	sec := &AzureClient{}
 	res := defaultDB.Where("name = ?", "123").First(sec)
 	if res.Error != nil {
 		return "", errors.WithStack(res.Error)
@@ -23,8 +23,26 @@ func GetSecretsHash() (string, error) {
 	return sec.ClientSecret, nil
 }
 
+// get 自定义select
+type ResGroupNameCost struct {
+	ResGroupName string
+	Cost         float64
+}
+
+func (t *ResGroupNameCost) TableName() string {
+	return "azure_cost_report"
+}
+
+func GetDailyResGroupCost(in *AzureClient) []*ResGroupNameCost {
+	dayData := []*ResGroupNameCost{}
+	tx := defaultDB.Where("date_type = ?", in.ClientID)
+	tx.Group("res_group_name").Select("res_group_name, sum(cost)::NUMERIC as cost") // PG money type shoube convert to NUMERIC
+	tx.Find(&dayData)
+	return dayData
+}
+
 // create
-func Inserts(ins []*AzureClientSecret) {
+func Inserts(ins []*AzureClient) {
 	if !CanWriteDB {
 		log.Info().Msg("CanWriteDB is false.Skip insert.")
 		fmt.Println(ins)
@@ -59,8 +77,8 @@ func inserts(data interface{}) error {
 }
 
 // update
-func UpdateAzureClientSecret(in *AzureClientSecret) error {
-	res := defaultDB.Model(&AzureClientSecret{}).Where("subscription_name = ?", in.SubscriptionName).Update("ClientSecret", in.ClientSecret)
+func UpdateAzureClient(in *AzureClient) error {
+	res := defaultDB.Model(&AzureClient{}).Where("subscription_name = ?", in.SubscriptionName).Update("ClientSecret", in.ClientSecret)
 	if res.Error != nil {
 		return errors.WithStack(res.Error)
 	}
@@ -70,15 +88,15 @@ func UpdateAzureClientSecret(in *AzureClientSecret) error {
 }
 
 // update or insert
-func ClientSecretCreateOrUpdate(ins []*AzureClientSecret) {
+func ClientSecretCreateOrUpdate(ins []*AzureClient) {
 	if !CanWriteDB {
 		log.Info().Msg("CanWriteDB is false.Skip insert.")
 		// infa.PrintYaml(ins)
 		return
 	}
-	insertsLis := []*AzureClientSecret{}
+	insertsLis := []*AzureClient{}
 	for _, in := range ins { // Update
-		upAff := defaultDB.Model(&AzureClientSecret{}).Where("subscription_name = ?", in.SubscriptionName).Updates(in).RowsAffected
+		upAff := defaultDB.Model(&AzureClient{}).Where("subscription_name = ?", in.SubscriptionName).Updates(in).RowsAffected
 		if upAff == 0 {
 			insertsLis = append(insertsLis, in)
 		}
@@ -86,20 +104,22 @@ func ClientSecretCreateOrUpdate(ins []*AzureClientSecret) {
 	Inserts(insertsLis) // Insert
 }
 
-// get 自定义select
-type ResGroupNameCost struct {
-	ResGroupName string
-	Cost         float64
+// delete one
+
+func KubeconfigDeleteOne(sID string) error {
+	res := defaultDB.Where("server_id = ?", sID).Delete(&AzureClient{})
+	if res.Error != nil {
+		return errors.WithStack(res.Error)
+	}
+	log.Debug().Msgf("delete server_id = %s, Affected Rows %d", sID, res.RowsAffected)
+	return nil
 }
 
-func (t *ResGroupNameCost) TableName() string {
-	return "azure_cost_report"
-}
-
-func GetDailyResGroupCost(in *AzureClientSecret) []*ResGroupNameCost {
-	dayData := []*ResGroupNameCost{}
-	tx := defaultDB.Where("date_type = ?", in.ClientID)
-	tx.Group("res_group_name").Select("res_group_name, sum(cost)::NUMERIC as cost") // PG money type shoube convert to NUMERIC
-	tx.Find(&dayData)
-	return dayData
+func KubeconfigDelete(ins []AzureClient) {
+	for _, in := range ins {
+		err := KubeconfigDeleteOne(in.ClientID)
+		if err != nil {
+			log.Err(err).Msg("KubeconfigDelete Error")
+		}
+	}
 }
