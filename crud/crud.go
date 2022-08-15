@@ -78,7 +78,7 @@ func inserts(data interface{}) error {
 
 // update
 func UpdateAzureClient(in *AzureClient) error {
-	res := defaultDB.Model(&AzureClient{}).Where("subscription_name = ?", in.SubscriptionName).Update("ClientSecret", in.ClientSecret)
+	res := defaultDB.Model(&AzureClient{}).Where("subscription_name = ?", in.SubsName).Update("ClientSecret", in.ClientSecret)
 	if res.Error != nil {
 		return errors.WithStack(res.Error)
 	}
@@ -88,32 +88,45 @@ func UpdateAzureClient(in *AzureClient) error {
 }
 
 // update or insert
-func ClientSecretCreateOrUpdate(ins []*AzureClient) {
+func ClientUpdateOrInsert(ins []*AzureClient) {
 	if !CanWriteDB {
 		log.Info().Msg("CanWriteDB is false.Skip insert.")
 		// infa.PrintYaml(ins)
 		return
 	}
+	if len(ins) == 0 {
+		return
+	}
 	insertsLis := []*AzureClient{}
 	for _, in := range ins { // Update
-		upAff := defaultDB.Model(&AzureClient{}).Where("subscription_name = ?", in.SubscriptionName).Updates(in).RowsAffected
-		if upAff == 0 {
+		op := defaultDB.Where("name = ?", in.SubsName).Updates(in)
+		if op.Error != nil {
+			log.Err(op.Error).Str("name", in.SubsName).Msg("do update error")
+			continue
+		}
+		if op.RowsAffected == 0 {
 			insertsLis = append(insertsLis, in)
 		}
 	}
-	Inserts(insertsLis) // Insert
+	updatedCount := len(ins) - len(insertsLis)
+	log.Info().Msgf("UpdateOrInsert. Total len %d. Updated %d. Need insert rows %d.", len(ins), updatedCount, len(insertsLis))
+	if len(insertsLis) > 0 {
+		inserts(insertsLis)
+	}
 }
 
 // delete one
-
 func KubeconfigDeleteOne(sID string) error {
-	res := defaultDB.Where("server_id = ?", sID).Delete(&AzureClient{})
+	// Unscoped 表示硬删除
+	res := defaultDB.Unscoped().Where("server_id = ?", sID).Delete(&AzureClient{})
 	if res.Error != nil {
 		return errors.WithStack(res.Error)
 	}
 	log.Debug().Msgf("delete server_id = %s, Affected Rows %d", sID, res.RowsAffected)
 	return nil
 }
+
+// delete list
 
 func KubeconfigDelete(ins []AzureClient) {
 	for _, in := range ins {

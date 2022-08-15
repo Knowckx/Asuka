@@ -24,6 +24,6 @@ func NewAzureClientTese() *AzureClient {
 	out.ClientSecret = "test"
 	out.SubscriptionID = "9d864643-1d6b-4ce5-93f8-60eb1e6a2172"
 	out.TenantID = "69b863e3-480a-4ee9-8bd0-20a8adb6909b"
-	out.SubscriptionName = "sap-cic-polar-dev1"
+	out.SubsName = "sap-cic-polar-dev1"
 	return out
 }

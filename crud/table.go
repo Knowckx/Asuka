@@ -8,14 +8,14 @@ import (
 
 type AzureClient struct {
 	gorm.Model
-	SubscriptionName string
-	SubscriptionID   string
-	TenantID         string
-	ClientID         string
-	ClientSecret     string
-	CreatedAt        time.Time
-	UpdatedAt        time.Time
-	DeletedAt        time.Time
+	SubsName       string
+	SubscriptionID string
+	TenantID       string
+	ClientID       string
+	ClientSecret   string
+	CreatedAt      time.Time
+	UpdatedAt      time.Time
+	DeletedAt      time.Time
 }
 
 func (t *AzureClient) TableName() string {
