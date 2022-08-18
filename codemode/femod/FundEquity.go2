@@ -90,12 +90,12 @@ func (fes FundEquityHis) Last() *FundEquityPoint {
 	return nil
 }
 
-func (fes *FundEquityHis) ToCurve() *mod.ChartCurve {
-	curve := mod.ChartCurve{}
-	for _, fe := range *fes {
-		cp := mod.NewChartPoint(fe.Time, fe.NAV)
-		curve = append(curve, cp)
-	}
+func (fes *FundEquityHis) ToCurve() *ChartCurve {
+	curve := ChartCurve{}
+	// for _, fe := range *fes {
+	// 	cp := mod.NewChartPoint(fe.Time, fe.NAV)
+	// 	curve = append(curve, cp)
+	// }
 	return &curve
 }
 
@@ -110,6 +110,11 @@ func (fes FundEquityHis) String() string {
 
 // time - value 表示的走势图曲线 比如复权后的净值曲线
 type ChartCurve []*ChartPoint
+
+type ChartPoint struct {
+	strV1 string
+	intV1 string
+}
 
 // 计算最大回撤
 func (cc ChartCurve) GetMaxDD() *MaxDD {
@@ -231,7 +236,7 @@ func (tr *TimeRange) AddDay(count int) {
 }
 
 // 获取复权后的净值曲线
-func genEquityCure(hes mod.AccHisEquitys, ts mod.Trades) *mod.ChartCurve {
+func genEquityCure(hes mod.AccHisEquitys, ts mod.Trades) *ChartCurve {
 	sortHesTime := func(i, j int) bool { // 净值时间排序
 		return hes[i].Time.Before(hes[j].Time)
 	}
@@ -323,6 +328,7 @@ func GenS4EquityCurveFromTrades(ts mod.Trades, joinInfo *mod.AccountPreScore) *f
 	if len(ts) == 0 {
 		return &record
 	}
+
 	ts = util.SortTradesByCloseTime(ts)
 
 	//第一个点,采用的报名时间

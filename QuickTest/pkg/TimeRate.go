@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/rs/zerolog/log"
 	"golang.org/x/time/rate"
 )
 
@@ -22,7 +23,6 @@ func StartTest() {
 func Consumer() {
 	ok := GlbLit.Allow()
 	if !ok {
-
 		log.Info().Msg("No Token.returned.")
 		return
 	}

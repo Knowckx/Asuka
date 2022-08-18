@@ -1,7 +1,10 @@
 package crud
 
 import (
+	"fmt"
 	"testing"
+
+	"github.com/rs/zerolog/log"
 )
 
 /*
@@ -26,4 +29,15 @@ func NewAzureClientTese() *AzureClient {
 	out.TenantID = "69b863e3-480a-4ee9-8bd0-20a8adb6909b"
 	out.SubsName = "sap-cic-polar-dev1"
 	return out
+}
+
+// 日志测试
+func Test_TestLog(t *testing.T) {
+	mLog := log.With().Str("id", "222").Str("info", "Double Check Delete EA CR").Logger()
+	mLog.Info().Msg("Sub Log")
+	log.Info().Msg("Main Log")
+}
+
+func Test_TestLog2(t *testing.T) {
+	fmt.Println("123")
 }
