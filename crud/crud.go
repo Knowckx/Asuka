@@ -33,6 +33,16 @@ func GetRegisterClusters() ([]*AzureClient, error) {
 	return datas, nil
 }
 
+// count(*)
+func KubeconfigGetCount() int {
+	var count int
+	op := GetDefault().Raw("SELECT count(*) FROM bom_kubeconfig").Scan(&count)
+	if op.Error != nil {
+		log.Err(op.Error).Msg("")
+	}
+	return count
+}
+
 // get 自定义select
 type ResGroupNameCost struct {
 	ResGroupName string
@@ -137,21 +147,14 @@ func KubeconfigDeleteOne(sID string) error {
 }
 
 // delete list
-func KubeconfigDelete(ins []AzureClient) {
+func KubeconfigDelete(ins []*AzureClient) {
+	deleted := 0
 	for _, in := range ins {
 		err := KubeconfigDeleteOne(in.ClientID)
 		if err != nil {
 			log.Err(err).Msg("KubeconfigDelete Error")
 		}
+		deleted++
 	}
-}
-
-// count(*)
-func KubeconfigGetCount() int {
-	var count int
-	op := GetDefault().Raw("SELECT count(*) FROM bom_kubeconfig").Scan(&count)
-	if op.Error != nil {
-		log.Err(op.Error).Msg("")
-	}
-	return count
+	log.Info().Msgf("delete ClientSecret. want delete %d. have deleted %d", len(ins), deleted)
 }
