@@ -19,16 +19,16 @@ func main() {
 type AA int
 
 // 指针方法
-func (in *AA) D1(){
+func (in *AA) D1() {
 	fmt.Println("D1")
 }
 
 // 值方法
-func (in AA) D2(){
+func (in AA) D2() {
 	fmt.Println("D2")
 }
-type BB int
 
+type BB int
 
 func Test() {
 	var a AA = 1

@@ -96,7 +96,7 @@ func inserts(data interface{}) error {
 	return nil
 }
 
-// update
+// update one
 func UpdateAzureClient(in *AzureClient) error {
 	res := GetDefault().Model(&AzureClient{}).Where("subscription_name = ?", in.SubsName).Update("ClientSecret", in.ClientSecret)
 	if res.Error != nil {
