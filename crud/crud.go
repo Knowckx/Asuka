@@ -96,14 +96,13 @@ func inserts(data interface{}) error {
 	return nil
 }
 
-// update one
+// update 单列
 func UpdateAzureClient(in *AzureClient) error {
 	res := GetDefault().Model(&AzureClient{}).Where("subscription_name = ?", in.SubsName).Update("ClientSecret", in.ClientSecret)
 	if res.Error != nil {
 		return errors.WithStack(res.Error)
 	}
-	af := res.RowsAffected
-	log.Info().Msgf("Insert affectd lines %d", af)
+	// 更新一条数据的一列时，结果的RowsAffected值一定是1
 	return nil
 }
 

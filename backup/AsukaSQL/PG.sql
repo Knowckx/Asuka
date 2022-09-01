@@ -28,6 +28,8 @@ CREATE UNIQUE INDEX "idx_date" ON "azure_cost_report" USING btree (  -- 加唯�
 -- 加字段
 Alter Table azure_client_secret ADD "comment" varchar NOT NULL DEFAULT '';
 
+-- 字段改名
+ALTER TABLE table_name RENAME COLUMN column_A TO new_column_B;
 
 
 --删
