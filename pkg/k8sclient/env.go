@@ -3,7 +3,6 @@ package k8sclient
 import (
 	"context"
 	"fmt"
-	"testing"
 
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -16,24 +15,6 @@ import (
 )
 
 /* 获取对象的event */
-
-func Test_GetEAEvent(t *testing.T) {
-	kubeconfig := GetTestKubeconfig()
-	coreClient, err := CreateCoreClientFromKubeconfig(kubeconfig)
-	infa.PanicIfErr(err)
-	ea := &EphemeralAccess{}
-	ea.Name = "cheng-postgres-292"
-	ea.Namespace = "dx-test3"
-	event, err := GetEALatestEvent(coreClient, ea)
-	// event, err := GetLatestWarningEvent(coreClient, ea)
-
-	infa.PanicIfErr(err)
-	if event == nil {
-		fmt.Println("result event nil")
-	} else {
-		fmt.Println("result event ", event.Message, event.Count)
-	}
-}
 
 func GetTestKubeconfig() string {
 	kubeconfigPath := `/Users/i544887/dev/repos/kubeconfig/uat.yml`
