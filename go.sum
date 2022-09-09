@@ -328,6 +328,8 @@ github.com/yuin/goldmark v1.2.1/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9dec
 github.com/zalando/go-keyring v0.1.0/go.mod h1:RaxNwUITJaHVdQ0VC7pELPZ3tOWn13nr0gZMZEhpVU0=
 github.com/zellyn/kooky v0.0.0-20210408152652-87b89e95f98f/go.mod h1:QM4+3a3KkwFXtuTz+w41LBKU+MW7KecHBn0bNalcPKA=
 github.com/zenazn/goji v0.9.0/go.mod h1:7S9M489iMyHBNxwZnk9/EHS098H4/F6TATF2mIxtB1Q=
+github.tools.sap/aeolia/in-fa v0.0.0-20220825105742-e7e2b3d2702f h1:wijZ6Sj8QnE/7gjba4qXlbyp5KNQjxT3oJNkQ3l8x0w=
+github.tools.sap/aeolia/in-fa v0.0.0-20220825105742-e7e2b3d2702f/go.mod h1:5XTadhFHXzk9M42DT+/qcBrSLIhxjKwbrpxTqBgBOW4=
 go.opencensus.io v0.21.0/go.mod h1:mSImk1erAIZhrmZN+AvHh14ztQfjbGwt4TtuofqLduU=
 go.opencensus.io v0.22.0/go.mod h1:+kGneAE2xo2IficOXnaByMWTGM9T73dGwxeWcUqIpI8=
 go.opencensus.io v0.22.2/go.mod h1:yxeiOL68Rb0Xd1ddK5vPZ/oVn4vY4Ynel7k9FzqtOIw=
