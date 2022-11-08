@@ -14,6 +14,8 @@ import (
 	"github.tools.sap/aeolia/in-fa/parallel"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/tools/clientcmd"
+	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 )
 
 //-- 一堆kubeconfig的验证 用上了我们包的waitpool
@@ -50,7 +52,7 @@ type InputArgs struct {
 	Args string // 带入的参数
 }
 
-//对每个文件的操作
+// 对每个文件的操作
 func (t *KubeconfigChecker) fnwalk(path string, info os.FileInfo, err error) error {
 	if !strings.Contains(info.Name(), "kubeconfig") {
 		return nil
@@ -112,4 +114,15 @@ func CheckClientIsValid(cli *kubernetes.Clientset) bool {
 		// log.Err(err).Msg("CheckClientIsValid got error.")
 	}
 	return false
+}
+
+func CreateCoreClientFromKubeconfig(kubeconfig string) (*kubernetes.Clientset, error) {
+	config, err := clientcmd.BuildConfigFromKubeconfigGetter("", func() (*clientcmdapi.Config, error) {
+		return clientcmd.Load([]byte(kubeconfig))
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return kubernetes.NewForConfig(config)
 }

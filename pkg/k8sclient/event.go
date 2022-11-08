@@ -10,8 +10,6 @@ import (
 	infa "github.com/Knowckx/ainfa"
 	"github.com/pkg/errors"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/tools/clientcmd"
-	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 )
 
 /* 获取对象的event */
@@ -21,17 +19,6 @@ func GetTestKubeconfig() string {
 	res, err := infa.ReadFile(kubeconfigPath)
 	infa.PanicIfErr(err)
 	return res
-}
-
-func CreateCoreClientFromKubeconfig(kubeconfig string) (*kubernetes.Clientset, error) {
-	config, err := clientcmd.BuildConfigFromKubeconfigGetter("", func() (*clientcmdapi.Config, error) {
-		return clientcmd.Load([]byte(kubeconfig))
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	return kubernetes.NewForConfig(config)
 }
 
 // GetEALatestEvent from kind=EphemeralAccess
