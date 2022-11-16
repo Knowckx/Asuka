@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	infa "github.com/Knowckx/ainfa"
+	"github.com/Knowckx/ainfa/path"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog/log"
 	"github.com/stretchr/testify/assert"
@@ -19,6 +20,16 @@ import (
 )
 
 //-- 一堆kubeconfig的验证 用上了我们包的waitpool
+
+// 常用：获取测试环境某个路径下的kubeconfig
+func GetTestKubeConfig() string {
+	projName := "dev-datastore-operator"
+	pa := path.GetProjRootPath(projName)
+	kubePath := pa + ".vscode/cic-dev1.yml"
+	content, err := infa.ReadFile(kubePath)
+	infa.PanicIfErr(err)
+	return content
+}
 
 func Test_KubeconfigChecker(t *testing.T) {
 	ch := NewKubeconfigChecker("", 100)
