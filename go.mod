@@ -9,7 +9,7 @@ require (
 	github.com/go-pg/pg/v10 v10.10.6
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.27.0
-	github.com/stretchr/testify v1.8.0
+	github.com/stretchr/testify v1.8.1
 	github.tools.sap/aeolia/in-fa v0.0.0-20220825105742-e7e2b3d2702f
 	golang.org/x/time v0.0.0-20220722155302-e5dcc9cfc0b9
 	gorm.io/gorm v1.23.8
@@ -57,6 +57,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/sergi/go-diff v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/stretchr/objx v0.5.0 // indirect
 	github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc // indirect
 	github.com/vmihailenco/bufpool v0.1.11 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.3.4 // indirect

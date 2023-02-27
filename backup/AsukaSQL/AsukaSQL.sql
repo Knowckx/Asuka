@@ -49,3 +49,5 @@ INSERT INTO TABLE_NAME VALUES (value1,value2,...valueN);
 INSERT INTO tableA (field1,field2…)  VALUES ('{}', 'vs');
 
 
+
+

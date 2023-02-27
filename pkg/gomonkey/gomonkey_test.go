@@ -14,6 +14,8 @@ import (
 1. go get github.com/agiledragon/gomonkey/v2
 2. gomonkey需要加flag： go test -gcflags=all=-l   | vscode 搜索配置：go.testFlags
 3. mac会报错 panic: permission denied  解决：https://juejin.cn/post/7069990247005683749
+
+作者说的用法 https://blog.csdn.net/kevin_tech/article/details/126204044
 */
 
 // 使用1: mock函数
@@ -62,3 +64,6 @@ func TestApplyInterfaceReused(t *testing.T) {
 	output, err := pe.GetName()
 	fmt.Println(output, err)
 }
+
+// 桩序列
+// https://blog.csdn.net/kevin_tech/article/details/126204044
