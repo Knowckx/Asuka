@@ -71,5 +71,49 @@ class Board extends React.Component {
   
     renderSquare(i) {
       return <Square value={this.state.squares[i]} />;  // 这些square的状态通过props向下传递给子组件
+      
     }
 }
+
+// 假如子组件想要修改父组件的state, 直接做是不行的，因为state是私有的
+// 正常方式 从父组件向下传递一个onClick方法，这个onClick方法是父组件的， 子组件点击执行时，实际上是在执行父组件的逻辑
+class Board extends React.Component {
+    // ...省略其他代码
+
+    renderSquare(i) {
+        return (
+            <Square
+                value={this.state.squares[i]}  // 这个新建的Square对象含有两个props，keyName = "value"  值 = squares[i]
+                onClick={() => this.handleClick(i)} // 第二个props，keyName = "onClick"  值 = handleClick
+            />
+        );
+    }
+
+    handleClick(i) {
+        const squares = this.state.squares.slice();  // .slice() 方法创建了 squares 数组的一个副本
+        squares[i] = 'X';
+        this.setState({squares: squares});  // 整体赋值  而不是单独修改一个属性  这好像是react的不可变性
+      }
+}
+
+class Square extends React.Component {
+    render() {
+        return (  // 如何使用传递过来的props
+          <button className="square"  onClick={() => this.props.onClick()} >  
+            {this.props.value}
+          </button>
+        );
+      }
+}
+
+
+
+// 函数组件 有些react类组件类只有一个render方法  此时可以定义一个函数，这个函数接收 props 作为参数，然后返回需要渲染的元素。
+// 写起来会简单一点
+function Square(props) {
+    return (
+      <button className="square" onClick={props.onClick}>
+        {props.value}
+      </button>
+    );
+  }
